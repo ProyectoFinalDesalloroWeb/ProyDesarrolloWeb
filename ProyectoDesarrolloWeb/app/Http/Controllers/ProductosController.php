@@ -16,14 +16,27 @@ class ProductosController extends Controller
 
     public function create()
     {
-        //el formulario donde nosotros agregamos datos
-
-        return "aqui puedes agregar";
+        //formulario donde nosotros agregamos datos
+        return view('agregar');
     }
 
+
+    //REGISTRAR DATOS EN LA BD
     public function store(Request $request)
     {
-        //sirve para guardar datos en la BD
+        $productos = new Productos();
+        $productos->nombre = $request->post('nombre');
+        $productos->descripcion = $request->post('descripcion');
+        $productos->unidad_medida = $request->post('unidad_medida');
+        $productos->cantidad = $request->post('cantidad');
+        $productos->precio_unitario = $request->post('precio_unitario');
+        $productos->proveedor = $request->post('proveedor');
+        $productos->fecha_adquisicion = $request->post('fecha_adquisicion');
+        $productos->fecha_expiracion = $request->post('fecha_expiracion');
+        $productos->estado = $request->post('estado');
+        $productos->save();
+
+        return redirect()->route('productos.index')->with("success", "Agregado con exito!");
     }
     public function show(Productos $productos)
     {

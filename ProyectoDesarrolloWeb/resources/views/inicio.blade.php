@@ -3,10 +3,11 @@
 @section('titulopagina','Inventario')
 
 @section('contenido')
-<br><br>
+
 <div class="card">
     <h5 class="card-header">Inventario</h5>
     <div class="card-body">
+
         <h5 class="card-title">Materia Prima</h5>
         <p>
             <a href="{{route("productos.create")}}" class="btn btn-primary">Agregar Materia Prima</a>
