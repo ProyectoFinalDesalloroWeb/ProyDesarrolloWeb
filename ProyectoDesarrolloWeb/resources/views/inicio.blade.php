@@ -9,10 +9,10 @@
         <div class="card-body">
             <div class="row">
                 <div class"col-sm-12">
-                    @if ($mensaje =Session::get('success'))
-                    <div class="alert alert-success" role="alert">
-                        {{$mensaje}}
-                    </div>
+                    @if ($mensaje = Session::get('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ $mensaje }}
+                        </div>
                     @endif
                 </div>
             </div>
@@ -53,12 +53,18 @@
                             <td>{{ $item->estado }}</td>
                             <td>
                                 <form action="{{ route('productos.edit', $item->id) }}" method="GET">
-                                    <button class="btn btn-warning" type="submit">
+                                    <button class="btn btn-warning" >
                                         <span class="fa-solid fa-pencil"></span>
                                     </button>
                                 </form>
                             </td>
-                            <td></td>
+                            <td>
+                                <form action="{{ route('productos.show', $item->id) }}" method="GET">
+                                    <button class="btn btn-danger " >
+                                        <span class="fas fa-minus"></span>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

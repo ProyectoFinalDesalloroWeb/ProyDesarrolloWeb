@@ -19,12 +19,14 @@
                 <label for="">Descripcion</label>
                 <input type="text" name="descripcion" class="form-control" required value="{{$productos->descripcion}}">
 
-                <label for="unidad_medida">Unidad de medidad</label>
-                <select name="unidad_medida" class="form-control" required value="{{$productos->unidad_medida}}">
-                    <option value="kilogramos">Kilogramos</option>
-                    <option value="gramos">Gramos</option>
-                    <option value="litros">Litros</option>
-                    <option value="mililitros">Mililitros</option>
+                <label for="unidad_medida">Unidad de medida</label>
+                <select name="unidad_medida" id="unidad_medida" class="form-control" required>
+                    <option value="kilogramos" {{ $productos->unidad_medida == 'kilogramos' ? 'selected' : '' }}>Kilogramos
+                    </option>
+                    <option value="gramos" {{ $productos->unidad_medida == 'gramos' ? 'selected' : '' }}>Gramos</option>
+                    <option value="litros" {{ $productos->unidad_medida == 'litros' ? 'selected' : '' }}>Litros</option>
+                    <option value="mililitros" {{ $productos->unidad_medida == 'mililitros' ? 'selected' : '' }}>Mililitros
+                    </option>
                 </select>
 
                 <label for="">Cantidad</label>
@@ -43,9 +45,9 @@
                 <input type="date" name="fecha_expiracion" class="form-control" required value="{{$productos->fecha_expiracion}}">
 
                 <label for="estado">Estado</label>
-                <select name="estado" class="form-control" required value="{{$productos->estado}}">
-                    <option value="activa">Activa</option>
-                    <option value="inactiva">Inactiva</option>
+                <select name="estado" class="form-control" required>
+                    <option value="activa" {{ $productos->estado == 'activa' ? 'selected' : '' }}>Activa</option>
+                    <option value="inactiva" {{ $productos->estado == 'inactiva' ? 'selected' : '' }}>Inactiva</option>
                 </select>
                 <br>
                 <a href="{{ route('productos.index') }}" class="btn btn-info">
