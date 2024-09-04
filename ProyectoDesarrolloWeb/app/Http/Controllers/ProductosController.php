@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Productos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductosController extends Controller
 {
     public function index()
     {
-        //pagina de inicio
+        if (!Auth::check()) {
+            return redirect()->route('login'); // Redirige al login si el usuario no está autenticado
+        }
+
+        // Página de inicio si el usuario está autenticado
         $datos = Productos::all();
         return view('inicio', compact('datos'));
     }
@@ -51,8 +56,7 @@ class ProductosController extends Controller
         //y los coloca en un formulario
 
         $productos = Productos::find($id);
-        return view("actualizar" , compact('productos'));
-
+        return view("actualizar", compact('productos'));
     }
 
     public function update(Request $request, $id)
@@ -78,5 +82,9 @@ class ProductosController extends Controller
         $productos = Productos::find($id);
         $productos->delete();
         return redirect()->route('productos.index')->with("success", "Eliminado con exito!");
+    }
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
     }
 }

@@ -5,7 +5,7 @@
 @section('contenido')
 
     <div class="card">
-        <h5 class="card-header">Inventario</h5>
+        <h5 class="card-header text-center">Inventario</h5>
         <div class="card-body">
             <div class="row">
                 <div class"col-sm-12">
@@ -16,7 +16,7 @@
                     @endif
                 </div>
             </div>
-            <h5 class="card-title">Materia Prima</h5>
+            <h5 class="card-title text-center" >Materia Prima</h5>
             <p>
                 <a href="{{ route('productos.create') }}" class="btn btn-primary">
                     <span class="fa-solid fa-plus "></span> Agregar Materia Prima
