@@ -1,9 +1,9 @@
-@extends('layout/plantilla')
+@extends('layout.plantilla')
 
 @section('titulopagina', 'Inventario')
 
 @section('contenido')
-    <br>
+
     <div class="card">
         <h5 class="card-header text-center">Inventario</h5>
         <div class="card-body">
@@ -16,11 +16,19 @@
                     @endif
                 </div>
             </div>
-            <h5 class="card-title text-center" >Materia Prima</h5>
+            <h5 class="card-title text-center">Materia Prima</h5>
             <p>
-                <a href="{{ route('productos.create') }}" class="btn btn-primary">
-                    <span class="fa-solid fa-plus "></span> Agregar Materia Prima
-                </a>
+                <div class="d-flex justify-content-between">
+                    <a href="{{ route('productos.create') }}" class="btn btn-primary">
+                        <span class="fa-solid fa-plus"></span> Agregar Materia Prima
+                    </a>
+                    <form action="{{ route('productos.index') }}" method="GET" class="d-flex">
+                        <input type="text" name="search" class="form-control" placeholder="Buscar por nombre...">
+                        <button type="submit" class="btn btn-secondary ml-2 d-flex align-items-center">
+                            <span class="fa-solid fa-magnifying-glass me-2"></span> Buscar
+                        </button>
+                    </form>
+                </div>
             </p>
             <hr>
             <p class="card-text">
@@ -53,14 +61,14 @@
                             <td>{{ $item->estado }}</td>
                             <td>
                                 <form action="{{ route('productos.edit', $item->id) }}" method="GET">
-                                    <button class="btn btn-warning" >
+                                    <button class="btn btn-warning">
                                         <span class="fa-solid fa-pencil"></span>
                                     </button>
                                 </form>
                             </td>
                             <td>
                                 <form action="{{ route('productos.show', $item->id) }}" method="GET">
-                                    <button class="btn btn-danger " >
+                                    <button class="btn btn-danger">
                                         <span class="fas fa-minus"></span>
                                     </button>
                                 </form>
@@ -69,8 +77,15 @@
                     @endforeach
                 </tbody>
             </table>
+            </p>
+
+            <hr>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ $datos->links() }}
+                </div>
+
+            </div>
         </div>
-        </p>
-    </div>
     </div>
 @endsection

@@ -8,14 +8,25 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductosController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // Verifica si el usuario está autenticado
         if (!Auth::check()) {
-            return redirect()->route('login'); // Redirige al login si el usuario no está autenticado
+            return redirect()->route('login');
         }
 
-        // Página de inicio si el usuario está autenticado
-        $datos = Productos::all();
+        // Construye la consulta base
+        $query = Productos::query();
+
+        // Aplica filtro de búsqueda si se proporciona
+        if ($request->has('search')) {
+            $query->where('nombre', 'like', '%' . $request->search . '%');
+        }
+
+        // Obtiene los resultados paginados
+        $datos = $query->OrderBy('fecha_expiracion', 'asc')->paginate(10); // Paginación con 10 registros por página
+
+        // Devuelve la vista con los datos paginados
         return view('inicio', compact('datos'));
     }
 
