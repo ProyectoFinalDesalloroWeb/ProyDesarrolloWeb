@@ -1,22 +1,220 @@
-.gradient-custom-2 {
-    /* fallback for old browsers */
-    background: #fccb90;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-    }
-    
-    @media (min-width: 768px) {
-    .gradient-form {
-    height: 100vh !important;
-    }
-    }
-    @media (min-width: 769px) {
-    .gradient-custom-2 {
-    border-top-right-radius: .3rem;
-    border-bottom-right-radius: .3rem;
-    }
-    }
+/* Estilos específicos para la vista de inicio de sesión */
+
+ /* Estilo general para el contenedor de la vista de inicio de sesión */
+
+.login-view .gradient-form {
+    background-color: #ffffff; /* Color de fondo blanco */
+}
+
+.login-view .card {
+    border-radius: 1rem; /* Bordes redondeados */
+    background-color: #ffffff; /* Fondo blanco */
+    color: #000000; /* Color del texto */
+}
+
+.login-view .card-body img {
+    width: 200px; /* Tamaño del logo */
+}
+
+.login-view .eslogan {
+    font-size: 1.2rem; /* Tamaño de fuente del eslogan */
+    color: #FFD700; /* Color del texto del eslogan */
+    margin-bottom: 1rem; /* Espacio debajo del eslogan */
+}
+
+/* Título del formulario */
+.login-view .titulo {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.login-view .form-outline {
+    margin-bottom: 1rem; /* Espacio debajo de cada campo */
+}
+
+.login-view .form-label {
+    font-size: 1rem; /* Tamaño de fuente de las etiquetas */
+}
+
+.login-view .btn-block {
+    width: 100%; /* Botón de ancho completo */
+}
+
+.login-view .alert {
+    margin-bottom: 1rem; /* Espacio debajo del mensaje de error */
+    padding: 0.75rem 1.25rem; /* Espaciado interno del mensaje de error */
+    font-size: 0.875rem; /* Tamaño de fuente del mensaje de error */
+}
+
+.login-view .btn-outline-danger {
+    color: #dc3545; /* Color del texto del botón */
+    border-color: #dc3545; /* Color del borde del botón */
+}
+
+
+/* CSS específico para la vista de Registro */
+
+/* Fondo y diseño del formulario */
+.registro-form {
+    background-color: #f8f9fa;
+}
+
+/* Diseño de la tarjeta del formulario */
+.registro-card {
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Espaciado dentro de la tarjeta */
+.registro-card-body {
+    padding: 20px 30px;
+}
+
+/* Estilo del logo */
+.registro-logo {
+    width: 150px;
+    margin-bottom: 5px;
+}
+
+/* Estilo del eslogan */
+.registro-eslogan {
+    font-size: 1.2rem;
+    color: #FFD700;
+    margin-bottom: 15px;
+}
+
+/* Título del formulario */
+.registro-titulo {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Estilos para los inputs */
+.registro-input .form-control {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+}
+
+/* Input focus */
+.registro-input .form-control:focus {
+    box-shadow: none;
+    border-color: #007bff;
+}
+
+
+/*CSS Para Home*/
+
+.hero {
+    background: url('../imagenes/imagenfondo.jpg') no-repeat center center;
+    background-size: cover;
+    height: 500px;
+    color: black;
+    text-align: center;
+    padding: 150px 0;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: bold;
+}
+.hero p {
+    font-size: 1.5rem;
+}
+.info-section {
+    padding: 20px 0;
+}
+.info-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.info-section p {
+    font-size: 1rem;
+    color: #000000;
+    line-height: 1.5;
+    text-align: justify; /* Justificar texto */
+}
+.photo-gallery {
+    margin-top: 30px;
+}
+.photo-gallery img {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%; /* Asegura que la imagen ocupe el ancho del contenedor */
+    height: 200px; /* Ajusta la altura fija */
+    object-fit: cover; /* Mantiene la proporción y cubre el área del contenedor */
+}
+.photo-gallery .col-md-4 {
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #000000;
+    border-color: #e2a9b7;
+}
+.section-background {
+    background-color:  #ebb5bcaf;
+    padding: 30px 0;
+}
+.section-background h2 {
+    color: #000000;
+}
+.contact-info {
+    font-size: 1.1rem;
+}
+.contact-info a {
+    text-decoration: none;
+}
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+
+
+/*Es para la imagen que aparece en la pestaña*/
+
+.background-gradient {
+    background-image: url('../imagenes/imagenlogin.avif'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor */
+    background-position: center; /* Centra la imagen en el contenedor */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+  }
+
+
+
+  .form-control {
+    width: 100%; /* Ajusta el porcentaje */
+    max-width: 300px; /* También puedes limitar el ancho máximo */
+    margin: 0 auto; /* Para centrarlo */
+}
+
+.form-label {
+    margin-left: 20px;
+}
+
+/*En home el Nav*/
+.navbar {
+    background-color: rgb(241, 204, 240);
+}
+.nav-link {
+    color: #000 !important;
+    font-weight: 500;
+}
+.nav-link:hover {
+    color: #f061d1 !important;
+}
+.navbar-brand {
+    color: #0d6efd;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+
+/*fondo para todas las vistas*/
+body {
+    background-color: rgba(255, 253, 141, 0.12); /* Color con transparencia */
+    font-family: 'Poppins', sans-serif;
+}

@@ -5,7 +5,7 @@
 @section('contenido')
 
 
-
+    <br>
     <div class="card">
         <h5 class="card-header">Eliminar materia prima</h5>
         <div class="card-body">

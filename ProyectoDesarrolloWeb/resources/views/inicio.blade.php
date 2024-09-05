@@ -3,12 +3,12 @@
 @section('titulopagina', 'Inventario')
 
 @section('contenido')
-
+    <br>
     <div class="card">
         <h5 class="card-header text-center">Inventario</h5>
         <div class="card-body">
             <div class="row">
-                <div class"col-sm-12">
+                <div class="col-sm-12">
                     @if ($mensaje = Session::get('success'))
                         <div class="alert alert-success" role="alert">
                             {{ $mensaje }}

@@ -2,95 +2,77 @@
 <html lang="en">
 
 <head>
-    <title>REGISTRARSE</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro</title>
+    <link rel="icon" href="{{ asset('imagenes/LogoUMGpestaña.png') }}" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/estilos.css') }}">
 </head>
 
 <body>
-    <section class="h-100 gradient-form" style="background-color: #eee;">
-        <div class="container py-5 h-100">
+        <div class="container py-3 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-xl-10">
-                    <div class="card rounded-3 text-black">
+                    <div class="card registro-card text-black">
                         <div class="row g-0">
                             <div class="col-lg-6">
-                                <div class="card-body p-md-5 mx-md-4">
-
+                                <div class="card-body registro-card-body">
                                     <div class="text-center">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                                            style="width: 185px;" alt="logo">
-                                        <h4 class="mt-1 mb-5 pb-1">REGISTRARSE</h4>
+                                        <img src="{{ asset('imagenes/logoUMG.png') }}" class="registro-logo" alt="logo">
+                                        <p class="registro-eslogan"> Endulza Tu Vida con Sabor</p>
+                                        <h4 class="registro-titulo">Registrarse</h4>
                                     </div>
 
                                     <form action="{{ route('register') }}" method="post">
                                         @csrf
-                                        <p>Registrarse</p>
-
-                                        <div class="form-outline mb-4">
+                                        <div class="form-outline registro-input">
                                             <label class="form-label" for="form2Example11">Nombre</label>
-                                            <input type="text" name="name" id="form2Example11"
-                                                class="form-control" placeholder="Ingresar nombre" value="{{ old('name') }}" />
+                                            <input type="text" name="name" id="form2Example11" class="form-control"
+                                                placeholder="Ingresar nombre" value="{{ old('name') }}" required />
                                             @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
 
-                                        <div class="form-outline mb-4">
+                                        <div class="form-outline registro-input">
                                             <label class="form-label" for="form2Example12">Correo</label>
-                                            <input type="email" name="email" id="form2Example12"
-                                                class="form-control" placeholder="Ingresar correo" value="{{ old('email') }}" />
+                                            <input type="email" name="email" id="form2Example12" class="form-control"
+                                                placeholder="Ingresar correo" value="{{ old('email') }}" required />
                                             @error('email')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
 
-                                        <div class="form-outline mb-4">
+                                        <div class="form-outline registro-input">
                                             <label class="form-label" for="form2Example22">Contraseña</label>
                                             <input type="password" name="password" id="form2Example22"
-                                                class="form-control" />
+                                                class="form-control" required />
                                             @error('password')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
 
-                                        <div class="form-outline mb-4">
+                                        <div class="form-outline registro-input">
                                             <label class="form-label" for="form2Example23">Confirmar Contraseña</label>
                                             <input type="password" name="password_confirmation" id="form2Example23"
-                                                class="form-control" />
+                                                class="form-control" required />
                                         </div>
 
-                                        <div class="text-center pt-1 mb-5 pb-1">
-                                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                                                type="submit">Registrarse</button>
+                                        <div class="text-center pt-1 mb-2 pb-1">
+                                            <button class="btn btn-primary btn-block mb-2" type="submit">Registrarse</button>
                                         </div>
 
                                         <div class="d-flex align-items-center justify-content-center pb-4">
                                             <p class="mb-0 me-2">Ya tienes cuenta?</p>
-                                            <a href="{{ route('login') }}"
-                                                class="btn btn-outline-danger">Login</a>
+                                            <a href="{{ route('login') }}" class="btn btn-outline-danger">Login</a>
                                         </div>
 
                                     </form>
 
                                 </div>
                             </div>
-                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                    <h4 class="mb-4">Bienvenidos a Dulcería UMG, el paraíso de los sabores dulces y las sonrisas!</h4>
-                                    <p class="small mb-0">En Dulcería UMG, nos apasiona llevar alegría a cada momento
-                                        con nuestros deliciosos dulces y golosinas. Desde los clásicos que te recuerdan
-                                        a tu infancia hasta las últimas novedades en el mundo de las chucherías, aquí
-                                        encontrarás una amplia variedad de productos que harán que tus antojos se
-                                        conviertan en una experiencia inolvidable.</p>
-                                </div>
+                            <div class="col-lg-6 d-flex align-items-center background-gradient">
                             </div>
                         </div>
                     </div>
@@ -99,13 +81,7 @@
         </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
