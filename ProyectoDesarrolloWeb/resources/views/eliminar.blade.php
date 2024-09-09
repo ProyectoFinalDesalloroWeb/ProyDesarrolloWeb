@@ -24,7 +24,6 @@
                         <th>Proveedor</th>
                         <th>Fecha de adquisicion</th>
                         <th>Fecha de expiracion</th>
-                        <th>Estado</th>
                     </thead>
                     <tbody>
                         <tr>
@@ -36,7 +35,6 @@
                             <td>{{$productos->proveedor }}</td>
                             <td>{{$productos->fecha_adquisicion }}</td>
                             <td>{{$productos->fecha_expiracion }}</td>
-                            <td>{{$productos->estado }}</td>
                         </tr>
                     </tbody>
                 </table>

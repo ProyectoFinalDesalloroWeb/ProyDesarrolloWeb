@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -20,20 +19,24 @@ class RegisterController extends Controller
     // Método para manejar el registro de nuevos usuarios
     public function register(Request $request)
     {
+        // Validar los datos del formulario
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
+        // Crear un nuevo usuario
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
+        // Iniciar sesión automáticamente después del registro
         Auth::login($user);
 
-        return redirect()->route('productos.index');
+        // Redirigir a la vista 'home' después del registro exitoso
+        return redirect()->intended('home');
     }
 }

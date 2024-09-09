@@ -31,4 +31,11 @@ Route::delete('/destroy/{id}', [ProductosController::class, 'destroy'])->name('p
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
+// ruta para la vista de registros de movimientos
+Route::get('/registro', [ProductosController::class, 'mostrarRegistro'])->name('registro');
+
+//rutas para la vista de produccion
+Route::post('/producir', [ProductosController::class, 'producir'])->name('producir');
+Route::get('/produccion', [ProductosController::class, 'mostrarProduccion'])->name('produccion');
+
 

@@ -49,7 +49,6 @@ class ProductosController extends Controller
         $productos->proveedor = $request->post('proveedor');
         $productos->fecha_adquisicion = $request->post('fecha_adquisicion');
         $productos->fecha_expiracion = $request->post('fecha_expiracion');
-        $productos->estado = $request->post('estado');
         $productos->save();
     
         // Registrar movimiento de entrada
@@ -97,7 +96,6 @@ class ProductosController extends Controller
     $producto->proveedor = $request->post('proveedor');
     $producto->fecha_adquisicion = $request->post('fecha_adquisicion');
     $producto->fecha_expiracion = $request->post('fecha_expiracion');
-    $producto->estado = $request->post('estado');
     $producto->save();
 
     // Verifica si la nueva cantidad es mayor a la cantidad anterior

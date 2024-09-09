@@ -42,11 +42,6 @@
                 <label for="">Fecha de expiracion</label>
                 <input type="date" name="fecha_expiracion" class="form-control" required>
 
-                <label for="estado">Estado</label>
-                <select name="estado" class="form-control" required>
-                    <option value="activa">Activa</option>
-                    <option value="inactiva">Inactiva</option>
-                </select>
                 <br>
                 <a href="{{ route('productos.index') }}" class="btn btn-info">
                     <span class="fas fa-undo"></span> Regresar

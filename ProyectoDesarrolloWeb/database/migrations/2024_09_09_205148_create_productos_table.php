@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('proveedor');
             $table->date('fecha_adquisicion');
             $table->date('fecha_expiracion')->nullable();
-            $table->enum('estado', ['activa', 'inactiva']);
             $table->softDeletes(); // Agrega el campo deleted_at
             $table->timestamps();
         });

@@ -17,7 +17,7 @@
     <header class="hero">
         <div class="container">
             <br><br><br>
-            <h1>Bienvenid@ a Dulcería UMG</h1>
+            <h1>Bienvenido a Dulcería UMG</h1>
             <p>Información para nuestros valiosos empleados</p>
         </div>
     </header>

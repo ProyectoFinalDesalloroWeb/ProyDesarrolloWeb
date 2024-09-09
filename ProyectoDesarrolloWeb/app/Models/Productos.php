@@ -14,7 +14,7 @@ class Productos extends Model
     protected $fillable = [
         // otros campos
         'nombre', 'descripcion', 'unidad_medida', 'cantidad', 'precio_unitario',
-        'proveedor', 'fecha_adquisicion', 'fecha_expiracion', 'estado',
+        'proveedor', 'fecha_adquisicion', 'fecha_expiracion',
     ];
 }
 

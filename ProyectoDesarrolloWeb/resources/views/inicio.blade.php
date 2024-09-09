@@ -3,7 +3,7 @@
 @section('titulopagina', 'Inventario')
 
 @section('contenido')
-
+<br>
     <div class="card">
         <h5 class="card-header text-center">Inventario</h5>
         <div class="card-body">
@@ -16,21 +16,33 @@
                     @endif
                 </div>
             </div>
+
             <h5 class="card-title text-center">Materia Prima</h5>
-            <p>
-                <div class="d-flex justify-content-between">
-                    <a href="{{ route('productos.create') }}" class="btn btn-primary">
-                        <span class="fa-solid fa-plus"></span> Agregar Materia Prima
-                    </a>
-                    <form action="{{ route('productos.index') }}" method="GET" class="d-flex">
-                        <input type="text" name="search" class="form-control" placeholder="Buscar por nombre...">
-                        <button type="submit" class="btn btn-secondary ml-2 d-flex align-items-center">
-                            <span class="fa-solid fa-magnifying-glass me-2"></span> Buscar
-                        </button>
-                    </form>
-                </div>
-            </p>
+
+            <!-- Botones para ir a otras vistas -->
+            <div class="d-flex justify-content-between mb-4">
+                <!-- Botón para agregar materia prima -->
+                <a href="{{ route('productos.create') }}" class="btn btn-primary">
+                    <span class="fa-solid fa-plus"></span> Agregar Materia Prima
+                </a>
+                
+                <!-- Botón para ver el registro de movimientos -->
+                <a href="{{ route('registro') }}" class="btn btn-info">
+                    <span class="fa-solid fa-list"></span> Registro de Movimientos
+                </a>
+                
+                <!-- Botón para ir a la vista de producción -->
+                
+                <form action="{{ route('productos.index') }}" method="GET" class="d-flex">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar por nombre...">
+                    <button type="submit" class="btn btn-secondary ml-2 d-flex align-items-center">
+                        <span class="fa-solid fa-magnifying-glass me-2"></span> Buscar
+                    </button>
+                </form>
+            </div>
+
             <hr>
+
             <p class="card-text">
             <div class='table table-responsive'></div>
             <table class="table table-sm table-bordered">
@@ -43,7 +55,6 @@
                     <th>Proveedor</th>
                     <th>Fecha de Adquisicion</th>
                     <th>Fecha de Expiracion</th>
-                    <th>Estado</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </thead>
@@ -58,7 +69,6 @@
                             <td>{{ $item->proveedor }}</td>
                             <td>{{ $item->fecha_adquisicion }}</td>
                             <td>{{ $item->fecha_expiracion }}</td>
-                            <td>{{ $item->estado }}</td>
                             <td>
                                 <form action="{{ route('productos.edit', $item->id) }}" method="GET">
                                     <button class="btn btn-warning">
@@ -84,7 +94,6 @@
                 <div class="col-sm-12">
                     {{ $datos->links() }}
                 </div>
-
             </div>
         </div>
     </div>

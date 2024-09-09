@@ -28,6 +28,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('productos.index') }}">Materia Prima</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="{{ route('produccion') }}">Producir Dulce</a>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 @guest
