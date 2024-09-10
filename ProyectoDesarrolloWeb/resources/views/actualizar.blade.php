@@ -1,6 +1,6 @@
 @extends('layout/plantilla')
 
-@section('tituloPagina', 'ACTUALIZAR')
+@section('tituloPagina', 'Actualizar')
 
 @section('contenido')
 

@@ -1,6 +1,6 @@
 @extends('layout/plantilla')
 
-@section('tituloPagina', 'INSERTAR')
+@section('tituloPagina', 'Insertar')
 
 @section('contenido')
 

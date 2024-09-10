@@ -1,6 +1,6 @@
 @extends('layout/plantilla')
 
-@section('tituloPagina', 'ELIMINAR')
+@section('tituloPagina', 'Eliminar')
 
 @section('contenido')
 

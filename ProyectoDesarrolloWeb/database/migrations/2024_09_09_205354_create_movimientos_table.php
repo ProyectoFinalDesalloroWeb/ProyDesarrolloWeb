@@ -13,7 +13,7 @@ class CreateMovimientosTable extends Migration
             $table->unsignedBigInteger('producto_id')->nullable();
             $table->enum('tipo_movimiento', ['entrada', 'salida']);
             $table->decimal('cantidad', 8, 2);
-            $table->timestamp('fecha_movimiento');
+            $table->dateTime('fecha_movimiento')->useCurrent();
             $table->foreign('producto_id')->references('id')->on('productos')->onDelete('set null');
             $table->timestamps();
         });
