@@ -32,7 +32,10 @@
         <button type="button" class="btn btn-secondary" onclick="agregarMateriaPrima()">Agregar otra materia prima</button>
 
         <br><br>
-        
+
+        <a href="{{route('agregarp')}}" class="btn btn-info">
+                    <span class="fas fa-undo"></span> Regresar
+                </a>
         <button type="submit" class="btn btn-primary">Crear Dulce</button>
     </form>
 
@@ -61,3 +64,5 @@
     </script>
 
 @endsection
+
+

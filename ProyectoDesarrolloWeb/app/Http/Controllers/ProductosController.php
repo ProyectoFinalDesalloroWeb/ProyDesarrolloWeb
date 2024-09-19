@@ -202,7 +202,8 @@ public function producir(Request $request)
         ]);
     }
 
-    return redirect()->route('productos.index')->with('success', 'Dulce producido y materias primas descontadas del inventario.');
+    return redirect()->route('productot')->with('success', 'Dulce producido y materias primas descontadas del inventario.');
 }
+
 
 }
