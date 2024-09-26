@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductosfinalesController;
 use App\Http\Controllers\ProductosterminadosController;
+use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Auth;
 
 // Rutas de autenticación estándar proporcionadas por Laravel
@@ -50,3 +51,15 @@ Route::get('/agregarproducto', [ProductosfinalesController::class, 'create'])->n
 Route::post('/storeproducto', [ProductosfinalesController::class, 'store'])->name('storep');
 Route::delete('/destroyp/{id}', [ProductosfinalesController::class, 'destroy'])->name('destroyp');
 
+// Ruta para mostrar la selección de clientes
+Route::get('/venta', [VentaController::class, 'mostrarCliente'])->name('ventacliente');
+
+// Ruta para mostrar productos después de seleccionar un cliente
+Route::post('/productos', [VentaController::class, 'mostrarProductos'])->name('ventaproducto');
+
+// Ruta para guardar la venta
+Route::post('/guardar-venta', [VentaController::class, 'guardarVenta'])->name('guardar.venta');
+
+
+Route::get('/ventas', [VentaController::class, 'index'])->name('indexpdf');
+Route::get('/ventas/{id}/pdf', [VentaController::class, 'generarPDF'])->name('pdf');

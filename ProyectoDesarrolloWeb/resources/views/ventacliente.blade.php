@@ -11,7 +11,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('productos') }}" method="POST">
+    <form action="{{ route('ventaproducto') }}" method="POST">
         @csrf
 
         <!-- Selección del Cliente -->
