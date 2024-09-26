@@ -31,6 +31,9 @@
                 <li>
                     <a class="nav-link" href="{{ route('productot') }}">Producto terminado</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="{{ route('ventacliente') }}">Realizar Ventas</a>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 @guest
@@ -39,9 +42,6 @@
                     </li>
                     <li class="nav-item me-3">
                         <a class="nav-link" href="{{ route('register') }}">Register</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ route('ventacliente') }}">Realizar Ventas</a>
                     </li>
                 @else
                     <li class="nav-item me-3">

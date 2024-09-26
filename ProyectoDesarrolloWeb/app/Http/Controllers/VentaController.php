@@ -14,14 +14,14 @@ class VentaController extends Controller
     public function mostrarCliente()
     {
         $clientes = Clientes::all(); // Obtener todos los clientes
-        return view('cliente', compact('clientes'));
+        return view('ventacliente', compact('clientes'));
     }
 
     public function mostrarProductos(Request $request)
     {
         $clienteId = $request->input('cliente_id');
         $productos = productosfinales::all(); // Obtener todos los productos
-        return view('productos', compact('clienteId', 'productos'));
+        return view('ventaproducto', compact('clienteId', 'productos'));
     }
 
     public function guardarVenta(Request $request)
@@ -72,7 +72,7 @@ class VentaController extends Controller
 public function index()
     {
         $ventas = Ventas::with('cliente')->get();
-        return view('index', compact('ventas'));
+        return view('indexpdf', compact('ventas'));
     }
 
     public function generarPDF($ventaId)
