@@ -62,7 +62,7 @@ class VentaController extends Controller
     }
 
     // Redirigir o mostrar un mensaje de éxito
-    return redirect()->route('cliente')->with('success', 'Venta guardada correctamente.');
+    return redirect()->route('ventacliente')->with('success', 'Venta guardada correctamente.');
 }
 
 
