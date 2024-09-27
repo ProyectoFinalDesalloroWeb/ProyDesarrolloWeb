@@ -31,6 +31,9 @@
                 <li>
                     <a class="nav-link" href="{{ route('productot') }}">Producto terminado</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="{{ route('ventacliente') }}">Realizar Ventas</a>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 @guest
