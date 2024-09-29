@@ -57,9 +57,12 @@ Route::get('/venta', [VentaController::class, 'mostrarCliente'])->name('ventacli
 // Ruta para mostrar productos después de seleccionar un cliente
 Route::post('/productos', [VentaController::class, 'mostrarProductos'])->name('ventaproducto');
 
+// Ruta para obtener el stock de un producto final
+Route::get('/obtener-stock/{productoId}', [ProductosfinalesController::class, 'obtenerStock'])->name('obtener.stock');
+
 // Ruta para guardar la venta
 Route::post('/guardar-venta', [VentaController::class, 'guardarVenta'])->name('guardar.venta');
 
-
 Route::get('/ventas', [VentaController::class, 'index'])->name('indexpdf');
 Route::get('/ventas/{id}/pdf', [VentaController::class, 'generarPDF'])->name('pdf');
+

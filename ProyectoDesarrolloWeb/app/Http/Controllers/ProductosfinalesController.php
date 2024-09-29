@@ -117,4 +117,18 @@ class ProductosfinalesController extends Controller
         return view("productoterminado", compact('datos'));
     
     }
+    public function obtenerStock($productoId)
+    {
+        // Buscar el producto por su ID
+        $producto = productosfinales::find($productoId);
+
+        // Verificar si el producto existe y devolver su stock (existencia)
+        if ($producto) {
+            return response()->json(['stock' => $producto->existencia]);
+        } else {
+            return response()->json(['stock' => 0, 'message' => 'Producto no encontrado.']);
+        }
+    }
+
 }
+

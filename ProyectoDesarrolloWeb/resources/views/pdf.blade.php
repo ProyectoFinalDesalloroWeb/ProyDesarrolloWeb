@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 <head>
     <title>Factura de Venta</title>
     <style>
@@ -11,9 +9,8 @@
 </head>
 <body>
     <h1>Factura de Venta</h1>
-    <p><strong>Cliente:</strong> {{ $venta->cliente->nombre ?? 'No disponible' }}</p>
+    <p><strong>Cliente:</strong> {{ $venta->cliente->Empresa_Cliente ?? 'No disponible' }}</p>
     <p><strong>Fecha de Venta:</strong> {{ $venta->fecha_venta }}</p>
-
     <table>
         <thead>
             <tr>
@@ -34,7 +31,6 @@
             @endforeach
         </tbody>
     </table>
-
     <h3>Total: ${{ number_format($detalles->sum('subtotal'), 2) }}</h3>
 </body>
 </html>

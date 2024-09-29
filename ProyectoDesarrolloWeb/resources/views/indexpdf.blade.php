@@ -28,7 +28,7 @@
         @foreach($ventas as $venta)
             <tr>
                 <td>{{ $venta->id }}</td>
-                <td>{{ $venta->cliente->nombre ?? 'No disponible' }}</td>
+                <td>{{ $venta->cliente->Empresa_Cliente}}</td>
                 <td>{{ $venta->fecha_venta }}</td>
                 <td>
                     <a class="btn" href="{{ route('pdf', $venta->id) }}">Descargar PDF</a>

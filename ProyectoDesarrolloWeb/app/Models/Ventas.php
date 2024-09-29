@@ -23,4 +23,15 @@ class Ventas extends Model
     {
         return $this->hasMany(DetalleVentas::class);
     }
+    use HasFactory;
+
+    // Relación muchos a muchos con productosfinales usando una tabla intermedia
+    public function productos()
+    {
+        // Asumimos que la tabla intermedia se llama "detalle_ventas"
+        return $this->belongsToMany(productosfinales::class, 'detalle_ventas', 'venta_id', 'producto_id')
+                    ->withPivot('cantidad', 'precio_unitario', 'subtotal');
+    }
+    
 }
+
