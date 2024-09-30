@@ -59,7 +59,7 @@ class VentaController extends Controller
         }
 
         // Redirigir con un mensaje de éxito después de guardar
-        return redirect()->route('indexpdf')->with('success', 'Venta guardada correctamente.');
+        return redirect()->route('ventacliente')->with('success', 'Venta guardada correctamente.');
     }
 
     // Método para generar el PDF de la factura
@@ -100,7 +100,7 @@ class VentaController extends Controller
         return $pdf->download('venta_' . $venta->id . '.pdf');
     }
 
-    // Método para devolver la cantidad de stock de un producto
+    /* Método para devolver la cantidad de stock de un producto
     public function obtenerStock($productoId)
     {
         $producto = Producto::find($productoId);
@@ -119,7 +119,7 @@ class VentaController extends Controller
 
         $clientes = Cliente::all(); // Mantener los clientes en el dropdown
         return view('ventascliente', compact('ventas', 'clientes'));
-    }
+    }*/
     
 }
 
