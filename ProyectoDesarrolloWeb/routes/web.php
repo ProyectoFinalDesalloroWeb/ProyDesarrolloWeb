@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductosfinalesController;
 use App\Http\Controllers\ProductosterminadosController;
 use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ClientesController;
 
 // Rutas de autenticación estándar proporcionadas por Laravel
 Auth::routes();
@@ -66,3 +67,12 @@ Route::post('/guardar-venta', [VentaController::class, 'guardarVenta'])->name('g
 Route::get('/ventas', [VentaController::class, 'index'])->name('indexpdf');
 Route::get('/ventas/{id}/pdf', [VentaController::class, 'generarPDF'])->name('pdf');
 
+
+Route::get('inicioclientes', [ClientesController::class,'index'])->name('inicioclientes');
+Route::get('/clientes', [ClientesController::class,'create'])->name('clientes.create');
+Route::get('/clientes/buscar', [ClientesController::class, 'buscar'])->name('clientes.buscar');
+Route::get('/clientes/{id}/show', [ClientesController::class, 'show'])->name('clientes.show');
+Route::post('/clientes', [ClientesController::class, 'store'])->name('clientes.store');
+Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->name('clientes.destroy');
+Route::get('/clientes/{id}/edit', [ClientesController::class, 'edit'])->name('clientes.edit'); // Solo una ruta edit
+Route::put('/clientes/{id}', [ClientesController::class, 'update'])->name('clientes.update');

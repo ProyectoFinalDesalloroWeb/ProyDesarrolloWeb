@@ -1,3 +1,13 @@
+@extends('layout.plantilla')
+
+@section('tituloPagina', 'Registro Ventas')
+
+@section('contenido')
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +19,7 @@
             font-family: 'Arial', sans-serif;
             background-color: #f8f9fa;
             margin: 0;
-            padding: 20px;
+            
         }
 
         h1 {
@@ -123,3 +133,4 @@
 
 </body>
 </html>
+@endsection
