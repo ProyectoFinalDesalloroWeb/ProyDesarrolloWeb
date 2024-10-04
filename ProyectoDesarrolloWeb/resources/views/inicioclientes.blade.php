@@ -18,9 +18,9 @@
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-auto mb-2 mb-md-0">
-                    <button id="openAgregarClienteModal" type="button" class="btn btn-primary w-100 w-md-auto">
-                        <i class="fa-solid fa-cart-shopping"></i> Historial de Compras  
-                    </button>
+                    <a href="{{ route('ventas.historial') }}" class="btn btn-primary w-100 w-md-auto">
+                        <i class="fa-solid fa-cart-shopping"></i> Historial de Compras
+                    </a>
                 </div>
                 <!-- Espacio flexible -->
                 <div class="col"></div>
