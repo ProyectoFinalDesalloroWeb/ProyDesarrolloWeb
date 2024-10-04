@@ -116,6 +116,31 @@ class VentaController extends Controller
         return view('historialventas', compact('ventas'));
     }
 
+    public function buscarVentas(Request $request)
+    {
+        // Obtener el query de búsqueda
+        $query = $request->input('query');
+    
+        // Filtrar ventas por código de cliente o nombre de cliente
+        $ventas = Ventas::with('cliente', 'productos') // Incluye la relación de productos
+            ->whereHas('cliente', function ($q) use ($query) {
+                $q->where('Codigo', 'like', "%$query%")
+                  ->orWhere('Empresa_Cliente', 'like', "%$query%");
+            })
+            ->get();
+    
+        // Calcular el total de cada venta
+        foreach ($ventas as $venta) {
+            $venta->total_venta = 0; // Inicializar el total de la venta
+            foreach ($venta->productos as $producto) {
+                $venta->total_venta += $producto->pivot->subtotal; // Sumar el subtotal de cada producto
+            }
+        }
+    
+        return view('historialventas', compact('ventas'));
+    }
+
+
 
 
     /* Método para devolver la cantidad de stock de un producto
