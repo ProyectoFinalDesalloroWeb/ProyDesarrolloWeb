@@ -75,5 +75,7 @@
                     </tbody>
                 </table>
             </div>
+            <!-- Botón Descargar PDF -->
+            <a class="btn btn-info btn-sm mb-2" href="{{ route('pdf', $venta->id) }}">Descargar PDF</a>
 
 @endsection
