@@ -27,10 +27,10 @@
                 </select>
 
                 <label class="form-label" for="">Cantidad:</label>
-                <input type="text" name="cantidad" class="form-control" required value="{{$productos->cantidad}}">
+                <input type="number" name="cantidad" class="form-control" required value="{{$productos->cantidad}}">
 
                 <label class="form-label" for="">Precio unitario:</label>
-                <input type="text" name="precio_unitario" class="form-control" required value="{{$productos->precio_unitario}}">
+                <input type="number" name="precio_unitario" class="form-control" required value="{{$productos->precio_unitario}}">
 
                 <label class="form-label" for="">Proveedor:</label>
                 <input type="text" name="proveedor" class="form-control" required value="{{$productos->proveedor}}">

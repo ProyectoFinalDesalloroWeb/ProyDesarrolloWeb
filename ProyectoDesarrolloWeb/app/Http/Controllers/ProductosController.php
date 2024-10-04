@@ -80,51 +80,65 @@ class ProductosController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    // Encuentra el producto por su id
-    $producto = Productos::find($id);
-
-    // Guarda la cantidad actual antes de actualizar
-    $cantidadAnterior = $producto->cantidad;
-
-    // Actualiza los campos del producto
-    $producto->nombre = $request->post('nombre');
-    $producto->descripcion = $request->post('descripcion');
-    $producto->unidad_medida = $request->post('unidad_medida');
-    $producto->cantidad = $request->post('cantidad');
-    $producto->precio_unitario = $request->post('precio_unitario');
-    $producto->proveedor = $request->post('proveedor');
-    $producto->fecha_adquisicion = $request->post('fecha_adquisicion');
-    $producto->fecha_expiracion = $request->post('fecha_expiracion');
-    $producto->save();
-
-    // Verifica si la nueva cantidad es mayor a la cantidad anterior
-    if ($producto->cantidad > $cantidadAnterior) {
-        // Calcula la diferencia de cantidad
-        $diferencia = $producto->cantidad - $cantidadAnterior;
-
-        // Registrar un movimiento de entrada
-        Movimiento::create([
-            'producto_id' => $producto->id,
-            'tipo_movimiento' => 'entrada',
-            'cantidad' => $diferencia,
-            'fecha_movimiento' => now()
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255',
+            'unidad_medida' => 'required|string',
+            'cantidad' => 'required|numeric|min:0',
+            'precio_unitario' => 'required|numeric|min:0',
+            'proveedor' => 'required|string|max:255',
+            'fecha_adquisicion' => 'required|date',
+            'fecha_expiracion' => 'nullable|date',
         ]);
-    } elseif ($producto->cantidad < $cantidadAnterior) {
-        // Si la cantidad disminuyó, puedes registrar una salida
-        $diferencia = $cantidadAnterior - $producto->cantidad;
-
-        // Registrar un movimiento de salida
-        Movimiento::create([
-            'producto_id' => $producto->id,
-            'tipo_movimiento' => 'salida',
-            'cantidad' => $diferencia,
-            'fecha_movimiento' => now()
-        ]);
+    
+        // Encuentra el producto por su id
+        $producto = Productos::find($id);
+    
+        // Guarda la cantidad actual antes de actualizar
+        $cantidadAnterior = $producto->cantidad;
+    
+        // Actualiza los campos del producto
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
+        $producto->unidad_medida = $request->unidad_medida;
+        $producto->cantidad = $request->cantidad;
+        $producto->precio_unitario = $request->precio_unitario;
+        $producto->proveedor = $request->proveedor;
+        $producto->fecha_adquisicion = $request->fecha_adquisicion;
+        $producto->fecha_expiracion = $request->fecha_expiracion;
+        $producto->save();
+    
+        // Verifica si la nueva cantidad es mayor a la cantidad anterior
+        if ($producto->cantidad > $cantidadAnterior) {
+            // Calcula la diferencia de cantidad
+            $diferencia = $producto->cantidad - $cantidadAnterior;
+    
+            // Registrar un movimiento de entrada
+            Movimiento::create([
+                'producto_id' => $producto->id,
+                'tipo_movimiento' => 'entrada',
+                'cantidad' => $diferencia,
+                'fecha_movimiento' => now()
+            ]);
+        } elseif ($producto->cantidad < $cantidadAnterior) {
+            // Si la cantidad disminuyó, registrar un movimiento de salida
+            $diferencia = $cantidadAnterior - $producto->cantidad;
+    
+            // Registrar un movimiento de salida
+            Movimiento::create([
+                'producto_id' => $producto->id,
+                'tipo_movimiento' => 'salida',
+                'cantidad' => $diferencia,
+                'fecha_movimiento' => now()
+            ]);
+        }
+    
+        // Redirigir con mensaje de éxito
+        return redirect()->route('productos.index')->with("success", "Producto actualizado con éxito!");
     }
 
-    return redirect()->route('productos.index')->with("success", "Actualizado con éxito!");
-}
 
 
 
