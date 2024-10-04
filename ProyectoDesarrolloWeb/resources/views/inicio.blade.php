@@ -3,6 +3,14 @@
 @section('titulopagina', 'Inventario')
 
 @section('contenido')
+    <script>
+        setTimeout(function() {
+            var successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+        }, 3000); // 3000 ms = 3 segundos
+    </script>
     <br>
     <div class="card">
         <h5 class="card-header text-center">Inventario</h5>
@@ -101,14 +109,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        setTimeout(function() {
-            var successMessage = document.getElementById('successMessage');
-            if (successMessage) {
-                successMessage.style.display = 'none';
-            }
-        }, 3000); // 3000 ms = 3 segundos
-    </script>
 
 @endsection
