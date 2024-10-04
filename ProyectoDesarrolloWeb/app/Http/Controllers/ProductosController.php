@@ -40,15 +40,28 @@ class ProductosController extends Controller
     //REGISTRAR DATOS EN LA BD
     public function store(Request $request)
     {
+        // Validar datos del formulario
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255',
+            'unidad_medida' => 'required|string',
+            'cantidad' => 'required|numeric|min:0',
+            'precio_unitario' => 'required|numeric|min:0',
+            'proveedor' => 'required|string|max:255',
+            'fecha_adquisicion' => 'required|date',
+            'fecha_expiracion' => 'nullable|date',
+        ]);
+    
+        // Crear nuevo producto
         $productos = new Productos();
-        $productos->nombre = $request->post('nombre');
-        $productos->descripcion = $request->post('descripcion');
-        $productos->unidad_medida = $request->post('unidad_medida');
-        $productos->cantidad = $request->post('cantidad');
-        $productos->precio_unitario = $request->post('precio_unitario');
-        $productos->proveedor = $request->post('proveedor');
-        $productos->fecha_adquisicion = $request->post('fecha_adquisicion');
-        $productos->fecha_expiracion = $request->post('fecha_expiracion');
+        $productos->nombre = $request->nombre;
+        $productos->descripcion = $request->descripcion;
+        $productos->unidad_medida = $request->unidad_medida;
+        $productos->cantidad = $request->cantidad;
+        $productos->precio_unitario = $request->precio_unitario;
+        $productos->proveedor = $request->proveedor;
+        $productos->fecha_adquisicion = $request->fecha_adquisicion;
+        $productos->fecha_expiracion = $request->fecha_expiracion;
         $productos->save();
     
         // Registrar movimiento de entrada
@@ -59,10 +72,10 @@ class ProductosController extends Controller
             'fecha_movimiento' => now(),
         ]);
     
-        return redirect()->route('productos.index')->with("success", "Agregado con éxito!");
+        // Redirigir con mensaje de éxito
+        return redirect()->route('productos.index')->with("success", "Producto agregado con éxito!");
     }
 
-    
     public function show($id)
     {
         //servira para obtener un registro de nuestra tabla

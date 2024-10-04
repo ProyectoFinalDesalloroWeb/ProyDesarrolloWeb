@@ -25,10 +25,10 @@
                     </select>
 
                     <label class="form-label" for="">Cantidad:</label>
-                    <input type="text" name="cantidad" class="form-control" required>
+                    <input type="number" name="cantidad" class="form-control" min="0" required>
 
                     <label class="form-label" for="">Precio unitario:</label>
-                    <input type="text" name="precio_unitario" class="form-control" required>
+                    <input type="number" step="0.01" name="precio_unitario" class="form-control" min="0" required>
 
                     <label class="form-label" for="">Proveedor:</label>
                     <input type="text" name="proveedor" class="form-control" required>
