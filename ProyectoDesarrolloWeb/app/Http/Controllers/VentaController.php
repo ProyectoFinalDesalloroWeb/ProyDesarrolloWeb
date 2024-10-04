@@ -100,6 +100,24 @@ class VentaController extends Controller
         return $pdf->download('venta_' . $venta->id . '.pdf');
     }
 
+    public function mostrarHistorialVentas()
+    {
+        // Traer todas las ventas con la relación de cliente y productos
+        $ventas = Ventas::with('cliente', 'productos')->get();
+        
+        // Calcular el total de cada venta
+        foreach ($ventas as $venta) {
+            $venta->total_venta = 0; // Inicializar el total de la venta
+            foreach ($venta->productos as $producto) {
+                $venta->total_venta += $producto->pivot->subtotal; // Sumar el subtotal de cada producto
+            }
+        }
+        // Retornar la vista y pasar las ventas
+        return view('historialventas', compact('ventas'));
+    }
+
+
+
     /* Método para devolver la cantidad de stock de un producto
     public function obtenerStock($productoId)
     {
