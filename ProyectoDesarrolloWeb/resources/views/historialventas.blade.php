@@ -77,5 +77,43 @@
             </div>
             <!-- Botón Descargar PDF -->
             <a class="btn btn-info btn-sm mb-2" href="{{ route('pdf', $venta->id) }}">Descargar PDF</a>
+            <!-- Botón Detalles de Compra que abre el modal -->
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal"
+            data-bs-target="#detallesModal{{ $venta->id }}">
+            Detalles de Compra
+        </button>
+    </div>
+
+    <!-- Modal para mostrar los detalles de la compra -->
+    <div class="modal fade" id="detallesModal{{ $venta->id }}" tabindex="-1"
+        aria-labelledby="detallesModalLabel{{ $venta->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="detallesModalLabel{{ $venta->id }}">
+                        Detalles de la Compra #{{ $venta->id }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div  class="col-md-6" >
+                            <p><strong>Código Cliente:</strong> {{ $venta->cliente->Codigo }}</p>
+                            <p><strong>Cliente:</strong> {{ $venta->cliente->Empresa_Cliente }}</p>
+                            <p><strong>Fecha de Venta:</strong> {{ $venta->fecha_venta }}</p>
+                            <p><strong>Total de Ventas:</strong> Q{{ number_format($venta->total_venta, 2) }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+@endforeach
 
 @endsection
