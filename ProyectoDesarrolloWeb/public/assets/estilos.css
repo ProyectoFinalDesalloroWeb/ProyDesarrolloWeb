@@ -511,3 +511,24 @@ body {
     font-size: 0.875rem;
 }
 
+
+.formagregar .form-control{
+    width: 100%; /* Ajusta el porcentaje */
+    max-width: 600px; /* También puedes limitar el ancho máximo */
+    margin: 0 auto; /* Para centrarlo */
+}
+
+.formagregar .form-label{
+    margin-left: 175px;
+}
+
+.formeditar .form-control {
+    width: 100%; /* Ajusta el porcentaje */
+    max-width: 600px; /* Limita el ancho máximo */
+    margin: 0 auto; /* Centra los elementos */
+}
+
+.formeditar .form-label {
+    margin-left: 175px; /* Espacio a la izquierda */
+}
+
