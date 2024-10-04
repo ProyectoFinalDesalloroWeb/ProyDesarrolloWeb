@@ -85,14 +85,14 @@
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header bg-info text-white">
-                                                    <h5 class="modal-title" id="detallesModalLabel{{ $venta->id }}">
+                                                    <h5 class="modal-title text-center" id="detallesModalLabel{{ $venta->id }}">
                                                         Detalles de la Compra #{{ $venta->id }}</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="row">
-                                                        <div  class="col-md-6" >
+                                                        <div class="col-md-6 mx-auto text-center">
                                                             <p><strong>Código Cliente:</strong> {{ $venta->cliente->Codigo }}</p>
                                                             <p><strong>Cliente:</strong> {{ $venta->cliente->Empresa_Cliente }}</p>
                                                             <p><strong>Fecha de Venta:</strong> {{ $venta->fecha_venta }}</p>
@@ -100,10 +100,10 @@
                                                         </div>
                                                     </div>
 
-                                                    <h6 class="mt-3"><strong>Productos:</strong></h6>
+                                                    <h6 class="mt-3 text-center"><strong>Productos:</strong></h6>
                                                     <ul class="list-group">
                                                         @foreach ($venta->productos as $producto)
-                                                            <li class="list-group-item">
+                                                            <li class="list-group-item text-center">
                                                                 {{ $producto->nombre }} - 
                                                                 Q{{ number_format($producto->pivot->precio_unitario, 2) }} 
                                                                 (Cantidad: {{ $producto->pivot->cantidad }})
@@ -112,12 +112,12 @@
                                                     </ul>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Cerrar</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </td>
                             </tr>
                         @endforeach
