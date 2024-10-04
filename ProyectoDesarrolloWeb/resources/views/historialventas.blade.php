@@ -39,5 +39,18 @@
                     </button>
                 </form>
             </div>
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered text-center" id="clientesTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Código Cliente</th>
+                            <th>Cliente</th>
+                            <th>NIT</th>
+                            <th>Fecha de Venta</th>
+                            <th>Dirección</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
 
 @endsection
