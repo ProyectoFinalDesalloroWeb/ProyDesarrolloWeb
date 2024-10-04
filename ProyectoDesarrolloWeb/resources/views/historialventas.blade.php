@@ -114,6 +114,16 @@
     </div>
 </td>
 </tr>
+<h6 class="mt-3"><strong>Productos:</strong></h6>
+                                                    <ul class="list-group">
+                                                        @foreach ($venta->productos as $producto)
+                                                            <li class="list-group-item">
+                                                                {{ $producto->nombre }} - 
+                                                                Q{{ number_format($producto->pivot->precio_unitario, 2) }} 
+                                                                (Cantidad: {{ $producto->pivot->cantidad }})
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
 @endforeach
 
 @endsection
