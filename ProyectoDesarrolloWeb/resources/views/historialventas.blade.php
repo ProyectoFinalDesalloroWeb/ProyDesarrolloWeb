@@ -52,5 +52,28 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        @foreach ($ventas as $venta)
+                            <tr>
+                                <td class="align-middle">{{ $venta->id }}</td>
+                                <td class="align-middle">{{ $venta->cliente->Codigo }}</td>
+                                <td class="align-middle">{{ $venta->cliente->Empresa_Cliente }}</td>
+                                <td class="align-middle">{{ $venta->cliente->NIT }}</td>
+                                <td class="align-middle">{{ $venta->fecha_venta }}</td>
+                                <td class="align-middle">
+                                    {{ $venta->cliente->Departamento }},<br>
+                                    {{ $venta->cliente->Municipio }},<br>
+                                    {{ $venta->cliente->Completar_Direccion }}<br>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="d-flex flex-column">
+                                        <!-- Acciones aquí -->
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
 @endsection
