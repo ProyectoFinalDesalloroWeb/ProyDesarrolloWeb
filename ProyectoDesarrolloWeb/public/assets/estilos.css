@@ -1,57 +1,129 @@
-/* Estilos específicos para la vista de inicio de sesión */
-
- /* Estilo general para el contenedor de la vista de inicio de sesión */
+.login-view {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #00796b 0%, #004d40 100%); /* Fondo degradado */
+}
 
 .login-view .gradient-form {
-    background-color: #ffffff; /* Color de fondo blanco */
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 30px;
+    border-radius: 10px; /* Bordes más redondeados */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra sutil */
 }
 
 .login-view .card {
-    border-radius: 1rem; /* Bordes redondeados */
+    border-radius: 1.5rem; /* Aumenta el radio de los bordes */
     background-color: #ffffff; /* Fondo blanco */
-    color: #000000; /* Color del texto */
+    color: #000000; /* Texto en negro */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra para la tarjeta */
+    transition: transform 0.3s ease-in-out;
+}
+
+.login-view .card:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
 }
 
 .login-view .card-body img {
     width: 200px; /* Tamaño del logo */
+    margin-bottom: 1rem; /* Espacio inferior para el logo */
 }
 
 .login-view .eslogan {
-    font-size: 1.2rem; /* Tamaño de fuente del eslogan */
-    color: #FFD700; /* Color del texto del eslogan */
-    margin-bottom: 1rem; /* Espacio debajo del eslogan */
+    font-size: 1.4rem; /* Ajusta el tamaño de la fuente */
+    color: #FFD700; /* Color del eslogan */
+    margin-bottom: 1.5rem; /* Espacio debajo del eslogan */
+    font-weight: bold;
+    text-align: center; /* Centra el eslogan */
 }
 
 /* Título del formulario */
 .login-view .titulo {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: 20px;
     font-weight: bold;
+    text-align: center; /* Centrar el título */
+    color: #004d40; /* Color del título */
 }
 
 .login-view .form-outline {
-    margin-bottom: 1rem; /* Espacio debajo de cada campo */
+    margin-bottom: 1.5rem; /* Más espacio entre los campos */
 }
 
 .login-view .form-label {
-    font-size: 1rem; /* Tamaño de fuente de las etiquetas */
+    font-size: 1.1rem; /* Tamaño de fuente de las etiquetas */
+    font-weight: 500; /* Negrita para las etiquetas */
+    color: #00796b; /* Color de las etiquetas */
 }
 
+.login-view .form-control {
+    border-radius: 8px; /* Bordes redondeados de los inputs */
+    border: 1px solid #00796b; /* Borde en verde */
+    padding: 0.75rem;
+}
+
+.login-view .form-control:focus {
+    border-color: #004d40; /* Color de borde en el foco */
+    box-shadow: 0 0 5px rgba(0, 150, 136, 0.4); /* Efecto de sombra al hacer foco */
+}
+
+/* Botones */
 .login-view .btn-block {
-    width: 100%; /* Botón de ancho completo */
+    width: 100%; /* Botón ancho completo */
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: #00796b;
+    color: white;
+    transition: background-color 0.3s ease;
 }
 
+.login-view .btn-block:hover {
+    background-color: #004d40; /* Cambia el color al pasar el mouse */
+}
+
+/* Mensaje de error */
 .login-view .alert {
-    margin-bottom: 1rem; /* Espacio debajo del mensaje de error */
+    margin-bottom: 1.5rem; /* Más espacio debajo del mensaje de error */
     padding: 0.75rem 1.25rem; /* Espaciado interno del mensaje de error */
     font-size: 0.875rem; /* Tamaño de fuente del mensaje de error */
+    color: #721c24; /* Texto rojo oscuro */
+    background-color: #f8d7da; /* Fondo rojo claro */
+    border-color: #f5c6cb; /* Borde rojo */
 }
 
+/* Botón de alerta */
 .login-view .btn-outline-danger {
     color: #dc3545; /* Color del texto del botón */
     border-color: #dc3545; /* Color del borde del botón */
+    background-color: transparent;
+    transition: background-color 0.3s ease;
 }
 
+.login-view .btn-outline-danger:hover {
+    background-color: #dc3545; /* Fondo rojo al pasar el mouse */
+    color: white; /* Texto blanco */
+}
+
+/* Responsivo para móviles */
+@media (max-width: 576px) {
+    .login-view .gradient-form {
+        padding: 15px;
+    }
+
+    .login-view .titulo {
+        font-size: 1.5rem;
+    }
+
+    .login-view .form-label {
+        font-size: 1rem;
+    }
+
+    .login-view .btn-block {
+        font-size: 0.9rem;
+    }
+}
 
 /* CSS específico para la vista de Registro */
 
