@@ -30,7 +30,7 @@
                             <td>{{ $productos->descripcion }}</td>
                             <td>{{ $productos->unidad_medida }}</td>
                             <td>{{ $productos->cantidad }}</td>
-                            <td>{{ $productos->precio_unitario }}</td>
+                            <td>Q{{ $productos->precio_unitario }}</td>
                             <td>{{ $productos->proveedor }}</td>
                             <td>{{ $productos->fecha_adquisicion }}</td>
                             <td>{{ $productos->fecha_expiracion }}</td>
