@@ -9,7 +9,7 @@
         <p class="card-text">
             <div class="alert alert-danger" role="alert">
                 Estas seguro de eliminar este registo!!!
-                <table class="table table-sm table-hover table-bordered" style="background-colo: white">
+                <table class="table table-sm table-hover table-bordered eliminar-table" style="background-color: white;">
                     <thead>
                         <th>Nombre</th>
                         <th>Existencia</th>
@@ -23,7 +23,7 @@
                             <td>{{$productos-> nombre}}</td>
                             <td>{{$productos-> existencia}}</td>
                             <td>{{$productos-> descripcion}}</td>
-                            <td>{{$productos-> precio_unitario}}</td>
+                            <td>Q{{$productos-> precio_unitario}}</td>
                             <td>{{$productos-> fecha_ingreso}}</td>
                             <td>{{$productos-> fecha_vencimiento}}</td>
                         </tr>
