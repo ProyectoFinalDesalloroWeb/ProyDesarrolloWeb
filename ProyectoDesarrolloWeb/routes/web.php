@@ -47,6 +47,7 @@ Route::get('/productoterminado', [ProductosfinalesController::class, 'productote
 Route::get('/actualizarproducto/{id}', [ProductosfinalesController::class, 'edit'])->name('actualizarp');
 Route::get('/showproducto/{id}', [ProductosfinalesController::class, 'show'])->name('showp');
 Route::put('/updatep/{id}', [ProductosfinalesController::class, 'update'])->name('updatep');
+Route::get('/eliminarUltimoProducto', [ProductosfinalesController::class, 'eliminarUltimoProducto'])->name('eliminarUltimoProducto');
 
 Route::get('/agregarproducto', [ProductosfinalesController::class, 'create'])->name('agregarp');
 Route::post('/storeproducto', [ProductosfinalesController::class, 'store'])->name('storep');
