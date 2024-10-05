@@ -116,7 +116,6 @@
                                     </optgroup>
                                     <optgroup label="Zacapa">
                                         <option value="Zacapa">Zacapa</option>
-                                        <option value="Chiquimula">Chiquimula</option>
                                         <option value="La Unión">La Unión</option>
                                         <option value="San Jorge">San Jorge</option>
                                     </optgroup>
@@ -124,7 +123,7 @@
                                         <option value="Puerto Barrios">Puerto Barrios</option>
                                         <option value="Livingston">Livingston</option>
                                         <option value="El Estor">El Estor</option>
-                                        <option value="María Dolores">María Dolores</option>
+                                        <option value="María Dolores">Morales</option>
                                         <option value="Los Amates">Los Amates</option>
                                     </optgroup>
                                 </select>
