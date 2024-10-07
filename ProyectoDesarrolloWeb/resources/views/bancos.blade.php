@@ -27,8 +27,8 @@
                                 <td>{{ $movimiento->fecha }}</td>
                                 <td>{{ $movimiento->descripcion }}</td>
                                 <td>{{ $movimiento->tipo }}</td>
-                                <td>{{ $movimiento->monto }}</td>
-                                <td>{{ $movimiento->saldo }}</td>
+                                <td>Q{{ $movimiento->monto }}</td>
+                                <td>Q{{ $movimiento->saldo }}</td>
                             </tr>
                         @endforeach
                     </tbody>
