@@ -47,6 +47,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('inicioclientes') }}">Clientes</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="{{ route('bancos') }}">Bancos</a>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 @guest

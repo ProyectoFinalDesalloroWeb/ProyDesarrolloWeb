@@ -10,6 +10,10 @@ use App\Http\Controllers\ProductosterminadosController;
 use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\BancoController;
+
+
+
 
 // Rutas de autenticación estándar proporcionadas por Laravel
 Auth::routes();
@@ -81,4 +85,7 @@ Route::put('/clientes/{id}', [ClientesController::class, 'update'])->name('clien
 //ruta para historial de ventas
 Route::get('/historial', [VentaController::class, 'mostrarHistorialVentas'])->name('ventas.historial');
 Route::get('/ventas/buscar', [VentaController::class, 'buscarVentas'])->name('ventas.buscar');
+
+//Ruta para bancos
+Route::get('/bancos', [BancoController::class, 'index'])->name('bancos');
 

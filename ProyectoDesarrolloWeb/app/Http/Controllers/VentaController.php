@@ -9,6 +9,7 @@ use App\Models\Ventas;
 use App\Models\DetalleVentas;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Producto;
+use App\Models\Banco; // Línea añadida: Importar el modelo Banco
 
 class VentaController extends Controller
 {
@@ -42,6 +43,9 @@ class VentaController extends Controller
         $venta->fecha_venta = now();
         $venta->save();
 
+        // Inicializar el total de la venta
+        $totalVenta = 0; // Línea añadida: Inicializa el total de la venta
+
         // Almacenar los productos seleccionados en la venta
         foreach ($request->productos as $producto) {
             $productoFinal = productosfinales::find($producto['id']);
@@ -56,10 +60,35 @@ class VentaController extends Controller
             // Reducir el stock de productos
             $productoFinal->existencia -= $producto['cantidad'];
             $productoFinal->save();
+
+            // Acumular el subtotal al total de la venta
+            $totalVenta += $producto['cantidad'] * $productoFinal->precio_unitario; // Línea añadida: Acumula el subtotal
         }
+
+        // Registrar ingreso en la tabla bancos
+        Banco::create([ // Línea añadida: Registrar ingreso en la tabla bancos
+            'fecha' => now(),
+            'descripcion' => 'Ingreso por venta', // Línea añadida: Descripción del ingreso
+            'tipo' => 'ingreso', // Línea añadida: Tipo de movimiento
+            'monto' => $totalVenta, // Línea añadida: Monto del ingreso
+            'saldo' => $this->calcularNuevoSaldo($totalVenta), // Línea añadida: Lógica para calcular el nuevo saldo
+        ]);
 
         // Redirigir con un mensaje de éxito después de guardar
         return redirect()->route('ventacliente')->with('success', 'Venta guardada correctamente.');
+    }
+
+    // Método para calcular el nuevo saldo
+    public function calcularNuevoSaldo($monto)
+    {
+        // Obtener el último saldo de la tabla bancos
+        $ultimoRegistro = Banco::orderBy('fecha', 'desc')->first(); // Línea añadida: Obtener el último registro de bancos
+
+        // Si no hay registros, el saldo inicial es 0
+        $saldoActual = $ultimoRegistro ? $ultimoRegistro->saldo : 0; // Línea añadida: Definir el saldo actual
+
+        // Calcular el nuevo saldo
+        return $saldoActual + $monto; // Línea añadida: Sumar el monto al saldo actual
     }
 
     // Método para generar el PDF de la factura
@@ -74,11 +103,12 @@ class VentaController extends Controller
         // Descargar el archivo PDF
         return view('pdf', compact('venta', 'detalles'));
     }
+
     public function producto()
     {
         return $this->belongsTo(Productosfinales::class, 'producto_id');
     }
- 
+
     //-------------------------------------
 
     public function index()
@@ -140,9 +170,6 @@ class VentaController extends Controller
         return view('historialventas', compact('ventas'));
     }
 
-
-
-
     /* Método para devolver la cantidad de stock de un producto
     public function obtenerStock($productoId)
     {
@@ -163,6 +190,4 @@ class VentaController extends Controller
         $clientes = Cliente::all(); // Mantener los clientes en el dropdown
         return view('ventascliente', compact('ventas', 'clientes'));
     }*/
-    
 }
-

@@ -6,6 +6,7 @@ use App\Models\Productos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Movimiento;
+use App\Models\Banco; // Línea añadida: Importar el modelo Banco
 
 class ProductosController extends Controller
 {
@@ -33,11 +34,11 @@ class ProductosController extends Controller
 
     public function create()
     {
-        //formulario donde nosotros agregamos datos
+        // Formulario donde nosotros agregamos datos
         return view('agregar');
     }
 
-    //REGISTRAR DATOS EN LA BD
+    // REGISTRAR DATOS EN LA BD
     public function store(Request $request)
     {
         // Validar datos del formulario
@@ -51,7 +52,7 @@ class ProductosController extends Controller
             'fecha_adquisicion' => 'required|date',
             'fecha_expiracion' => 'nullable|date',
         ]);
-    
+
         // Crear nuevo producto
         $productos = new Productos();
         $productos->nombre = $request->nombre;
@@ -63,7 +64,7 @@ class ProductosController extends Controller
         $productos->fecha_adquisicion = $request->fecha_adquisicion;
         $productos->fecha_expiracion = $request->fecha_expiracion;
         $productos->save();
-    
+
         // Registrar movimiento de entrada
         Movimiento::create([
             'producto_id' => $productos->id,
@@ -71,22 +72,39 @@ class ProductosController extends Controller
             'cantidad' => $productos->cantidad,
             'fecha_movimiento' => now(),
         ]);
-    
+
+        // Línea añadida: Calcular el monto del egreso
+        $montoEgreso = $productos->precio_unitario * $productos->cantidad;
+
+        // Línea añadida: Obtener el saldo anterior
+        $saldoAnterior = Banco::sum('monto'); // Sumar todos los ingresos menos los egresos
+
+        // Línea añadida: Crear un nuevo registro en la tabla bancos
+        Banco::create([
+            'fecha' => now(),
+            'descripcion' => 'Compra de materia prima', // Línea añadida: Descripción del egreso
+            'tipo' => 'egreso', // Línea añadida: Tipo de transacción
+            'monto' => $montoEgreso, // Línea añadida: Monto del egreso
+            'saldo' => $saldoAnterior - $montoEgreso, // Línea añadida: Actualizar el saldo restando el egreso
+            'materia_prima_id' => $productos->id, // Línea añadida: Agregar referencia al producto
+        ]);
+
         // Redirigir con mensaje de éxito
         return redirect()->route('productos.index')->with("success", "Producto agregado con éxito!");
     }
 
     public function show($id)
     {
-        //servira para obtener un registro de nuestra tabla
+        // Servira para obtener un registro de nuestra tabla
         $productos = Productos::find($id);
 
         return view('eliminar', compact('productos'));
     }
+
     public function edit($id)
     {
-        //este metodo nos sirve para traer los datos que se van a editar
-        //y los coloca en un formulario
+        // Este metodo nos sirve para traer los datos que se van a editar
+        // y los coloca en un formulario
 
         $productos = Productos::find($id);
         return view("actualizar", compact('productos'));
@@ -105,13 +123,13 @@ class ProductosController extends Controller
             'fecha_adquisicion' => 'required|date',
             'fecha_expiracion' => 'nullable|date',
         ]);
-    
+
         // Encuentra el producto por su id
         $producto = Productos::find($id);
-    
+
         // Guarda la cantidad actual antes de actualizar
         $cantidadAnterior = $producto->cantidad;
-    
+
         // Actualiza los campos del producto
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
@@ -122,12 +140,12 @@ class ProductosController extends Controller
         $producto->fecha_adquisicion = $request->fecha_adquisicion;
         $producto->fecha_expiracion = $request->fecha_expiracion;
         $producto->save();
-    
+
         // Verifica si la nueva cantidad es mayor a la cantidad anterior
         if ($producto->cantidad > $cantidadAnterior) {
             // Calcula la diferencia de cantidad
             $diferencia = $producto->cantidad - $cantidadAnterior;
-    
+
             // Registrar un movimiento de entrada
             Movimiento::create([
                 'producto_id' => $producto->id,
@@ -138,7 +156,7 @@ class ProductosController extends Controller
         } elseif ($producto->cantidad < $cantidadAnterior) {
             // Si la cantidad disminuyó, registrar un movimiento de salida
             $diferencia = $cantidadAnterior - $producto->cantidad;
-    
+
             // Registrar un movimiento de salida
             Movimiento::create([
                 'producto_id' => $producto->id,
@@ -147,27 +165,24 @@ class ProductosController extends Controller
                 'fecha_movimiento' => now()
             ]);
         }
-    
+
         // Redirigir con mensaje de éxito
         return redirect()->route('productos.index')->with("success", "Producto actualizado con éxito!");
     }
 
+    public function destroy($id)
+    {
+        // Busca el producto por ID
+        $producto = Productos::find($id);
+        
+        // Usar soft delete en lugar de eliminar físicamente
+        if ($producto) {
+            $producto->delete(); // Soft delete
+            return redirect()->route('productos.index')->with("success", "Producto eliminado con éxito!");
+        }
 
-
-
-public function destroy($id)
-{
-    // Busca el producto por ID
-    $producto = Productos::find($id);
-    
-    // Usar soft delete en lugar de eliminar físicamente
-    if ($producto) {
-        $producto->delete(); // Soft delete
-        return redirect()->route('productos.index')->with("success", "Producto eliminado con éxito!");
+        return redirect()->route('productos.index')->with("error", "Producto no encontrado.");
     }
-
-    return redirect()->route('productos.index')->with("error", "Producto no encontrado.");
-}
 
     public function __construct()
     {
@@ -180,57 +195,62 @@ public function destroy($id)
         $movimientos = Movimiento::with(['producto' => function ($query) {
             $query->withTrashed();
         }])->get();
-    
+
         return view('registro', compact('movimientos'));
     }
 
-public function mostrarProduccion()
-{
-    // Obtener todos los productos disponibles para la producción
-    $productos = Productos::all();
-    
-    // Retornar la vista de producción y pasar los productos
-    return view('produccion', compact('productos'));
-}
-
-public function producir(Request $request)
-{
-    // Obtén los arrays de productos y cantidades del formulario
-    $producto_ids = $request->producto_id;
-    $cantidades = $request->cantidad;
-
-    // Recorre cada producto y cantidad seleccionada
-    foreach ($producto_ids as $index => $producto_id) {
-        // Busca un producto individual
-        $producto = Productos::find($producto_id);
-
-        // Verifica que el producto se haya encontrado
-        if (!$producto) {
-            return redirect()->back()->with('error', 'Producto no encontrado');
-        }
-
-        $cantidad_usada = $cantidades[$index];
-
-        // Verifica si hay suficiente inventario para cada producto
-        if ($producto->cantidad < $cantidad_usada) {
-            return redirect()->back()->with('error', 'Cantidad insuficiente en inventario para ' . $producto->nombre);
-        }
-
-        // Descontar del inventario
-        $producto->cantidad -= $cantidad_usada;
-        $producto->save();
-
-        // Registrar movimiento de salida
-        Movimiento::create([
-            'producto_id' => $producto->id,
-            'tipo_movimiento' => 'salida',
-            'cantidad' => $cantidad_usada,
-            'fecha_movimiento' => now(),
-        ]);
+    public function mostrarProduccion()
+    {
+        // Obtener todos los productos disponibles para la producción
+        $productos = Productos::all();
+        
+        // Retornar la vista de producción y pasar los productos
+        return view('produccion', compact('productos'));
     }
 
-    return redirect()->route('productot')->with('success', 'Dulce producido y materias primas descontadas del inventario.');
-}
+    public function producir(Request $request)
+    {
+        // Obtén los arrays de productos y cantidades del formulario
+        $producto_ids = $request->producto_id;
+        $cantidades = $request->cantidad;
 
+        // Recorre cada producto y cantidad seleccionada
+        foreach ($producto_ids as $index => $producto_id) {
+            // Busca un producto individual
+            $producto = Productos::find($producto_id);
 
+            // Verifica que el producto se haya encontrado
+            if (!$producto) {
+                return redirect()->back()->with('error', 'Producto no encontrado');
+            }
+
+            $cantidad_usada = $cantidades[$index];
+
+            // Verifica si hay suficiente inventario para cada producto
+            if ($producto->cantidad < $cantidad_usada) {
+                return redirect()->back()->with('error', 'Cantidad insuficiente en inventario para ' . $producto->nombre);
+            }
+
+            // Descontar del inventario
+            $producto->cantidad -= $cantidad_usada;
+            $producto->save();
+
+            // Registrar movimiento de salida
+            Movimiento::create([
+                'producto_id' => $producto->id,
+                'tipo_movimiento' => 'salida',
+                'cantidad' => $cantidad_usada,
+                'fecha_movimiento' => now(),
+            ]);
+        }
+
+        return redirect()->route('productot')->with('success', 'Dulce producido y materias primas descontadas del inventario.');
+    }
+
+    // Método añadido para actualizar el saldo
+    private function actualizarSaldo() // Línea añadida: Método privado para actualizar el saldo
+    {
+        $saldoAnterior = Banco::sum('monto');
+        // Aquí puedes implementar la lógica necesaria para actualizar el saldo según lo requieras
+    }
 }
