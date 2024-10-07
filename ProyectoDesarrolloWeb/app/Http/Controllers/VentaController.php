@@ -65,30 +65,24 @@ class VentaController extends Controller
             $totalVenta += $producto['cantidad'] * $productoFinal->precio_unitario; // Línea añadida: Acumula el subtotal
         }
 
+        // Línea añadida: Obtener el saldo actual
+        $saldoActual = Banco::orderBy('fecha', 'desc')->value('saldo') ?? 0; // Obtener el saldo más reciente
+
+        // Línea añadida: Calcular el nuevo saldo sumando el total de la venta
+        $nuevoSaldo = $saldoActual + $totalVenta;
+
         // Registrar ingreso en la tabla bancos
         Banco::create([ // Línea añadida: Registrar ingreso en la tabla bancos
             'fecha' => now(),
             'descripcion' => 'Ingreso por venta', // Línea añadida: Descripción del ingreso
             'tipo' => 'ingreso', // Línea añadida: Tipo de movimiento
             'monto' => $totalVenta, // Línea añadida: Monto del ingreso
-            'saldo' => $this->calcularNuevoSaldo($totalVenta), // Línea añadida: Lógica para calcular el nuevo saldo
+            'saldo' => $nuevoSaldo, // Línea añadida: Actualizar el saldo sumando el ingreso
+            'venta_id' => $venta->id, // Línea añadida: Referencia a la venta
         ]);
 
         // Redirigir con un mensaje de éxito después de guardar
         return redirect()->route('ventacliente')->with('success', 'Venta guardada correctamente.');
-    }
-
-    // Método para calcular el nuevo saldo
-    public function calcularNuevoSaldo($monto)
-    {
-        // Obtener el último saldo de la tabla bancos
-        $ultimoRegistro = Banco::orderBy('fecha', 'desc')->first(); // Línea añadida: Obtener el último registro de bancos
-
-        // Si no hay registros, el saldo inicial es 0
-        $saldoActual = $ultimoRegistro ? $ultimoRegistro->saldo : 0; // Línea añadida: Definir el saldo actual
-
-        // Calcular el nuevo saldo
-        return $saldoActual + $monto; // Línea añadida: Sumar el monto al saldo actual
     }
 
     // Método para generar el PDF de la factura
@@ -101,7 +95,7 @@ class VentaController extends Controller
         $pdf = Pdf::loadView('pdf', ['venta' => $venta]);
 
         // Descargar el archivo PDF
-        return view('pdf', compact('venta', 'detalles'));
+        return view('pdf', compact('venta'));
     }
 
     public function producto()
@@ -124,7 +118,7 @@ class VentaController extends Controller
         $detalles = DetalleVentas::where('venta_id', $ventaId)->get();
 
         // Cargar la vista para el PDF
-        $pdf = PDF::loadView('pdf', compact('venta', 'detalles'));
+        $pdf = Pdf::loadView('pdf', compact('venta', 'detalles'));
 
         // Devolver el PDF
         return $pdf->download('venta_' . $venta->id . '.pdf');

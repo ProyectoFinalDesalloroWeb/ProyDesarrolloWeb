@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit23114b4c003b4950724247c356212d91
+class ComposerStaticInit440545be9e13ab0e5a7fd191dec2327c
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -550,6 +550,7 @@ class ComposerStaticInit23114b4c003b4950724247c356212d91
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
+        'App\\Http\\Controllers\\BancoController' => __DIR__ . '/../..' . '/app/Http/Controllers/BancoController.php',
         'App\\Http\\Controllers\\ClientesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClientesController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
@@ -557,6 +558,7 @@ class ComposerStaticInit23114b4c003b4950724247c356212d91
         'App\\Http\\Controllers\\ProductosController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductosController.php',
         'App\\Http\\Controllers\\ProductosfinalesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductosfinalesController.php',
         'App\\Http\\Controllers\\VentaController' => __DIR__ . '/../..' . '/app/Http/Controllers/VentaController.php',
+        'App\\Models\\Banco' => __DIR__ . '/../..' . '/app/Models/Banco.php',
         'App\\Models\\Clientes' => __DIR__ . '/../..' . '/app/Models/Clientes.php',
         'App\\Models\\DetalleVentas' => __DIR__ . '/../..' . '/app/Models/DetalleVentas.php',
         'App\\Models\\Movimiento' => __DIR__ . '/../..' . '/app/Models/Movimiento.php',
@@ -3724,7 +3726,6 @@ class ComposerStaticInit23114b4c003b4950724247c356212d91
         'Nette\\Schema\\Elements\\Type' => __DIR__ . '/..' . '/nette/schema/src/Schema/Elements/Type.php',
         'Nette\\Schema\\Expect' => __DIR__ . '/..' . '/nette/schema/src/Schema/Expect.php',
         'Nette\\Schema\\Helpers' => __DIR__ . '/..' . '/nette/schema/src/Schema/Helpers.php',
-        'Nette\\Schema\\MergeMode' => __DIR__ . '/..' . '/nette/schema/src/Schema/MergeMode.php',
         'Nette\\Schema\\Message' => __DIR__ . '/..' . '/nette/schema/src/Schema/Message.php',
         'Nette\\Schema\\Processor' => __DIR__ . '/..' . '/nette/schema/src/Schema/Processor.php',
         'Nette\\Schema\\Schema' => __DIR__ . '/..' . '/nette/schema/src/Schema/Schema.php',
@@ -6741,9 +6742,9 @@ class ComposerStaticInit23114b4c003b4950724247c356212d91
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit23114b4c003b4950724247c356212d91::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit23114b4c003b4950724247c356212d91::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit23114b4c003b4950724247c356212d91::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit440545be9e13ab0e5a7fd191dec2327c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit440545be9e13ab0e5a7fd191dec2327c::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit440545be9e13ab0e5a7fd191dec2327c::$classMap;
 
         }, null, ClassLoader::class);
     }

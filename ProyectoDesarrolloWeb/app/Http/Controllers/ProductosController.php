@@ -77,7 +77,7 @@ class ProductosController extends Controller
         $montoEgreso = $productos->precio_unitario * $productos->cantidad;
 
         // Línea añadida: Obtener el saldo anterior
-        $saldoAnterior = Banco::sum('monto'); // Sumar todos los ingresos menos los egresos
+        $saldoAnterior = Banco::orderBy('fecha', 'desc')->value('saldo') ?? 0; // Obtener el saldo más reciente
 
         // Línea añadida: Crear un nuevo registro en la tabla bancos
         Banco::create([
@@ -247,10 +247,13 @@ class ProductosController extends Controller
         return redirect()->route('productot')->with('success', 'Dulce producido y materias primas descontadas del inventario.');
     }
 
-    // Método añadido para actualizar el saldo
-    private function actualizarSaldo() // Línea añadida: Método privado para actualizar el saldo
+    // Método para mostrar el inventario de dulces
+    public function mostrarInventarioDulces()
     {
-        $saldoAnterior = Banco::sum('monto');
-        // Aquí puedes implementar la lógica necesaria para actualizar el saldo según lo requieras
+        // Obtener todos los productos disponibles en el inventario
+        $productos = Productos::all();
+
+        // Retornar la vista del inventario y pasar los productos
+        return view('inventariodulces', compact('productos'));
     }
 }

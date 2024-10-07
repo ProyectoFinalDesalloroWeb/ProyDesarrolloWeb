@@ -49,15 +49,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const completarDireccionInput = form.querySelector('input[name="Completar_Direccion"]');
         const tipoClienteSelect = form.querySelector('select[name="Tipo_Cliente"]');
 
-        // Validar campo Empresa/Cliente
-        empresaClienteInput.addEventListener('input', function() {
-            const value = empresaClienteInput.value;
-            if (/[^a-zA-Z\s]/.test(value)) {
-                mostrarAlerta(form, 'El campo Empresa/Cliente solo debe contener letras.');
-                empresaClienteInput.value = value.replace(/[^a-zA-Z\s]/g, '');
-            }
-        });
-
+// Validar campo Empresa/Cliente
+empresaClienteInput.addEventListener('input', function() {
+    const value = empresaClienteInput.value;
+    // para permitir letras con tildes y espacios
+    if (/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/.test(value)) {
+        mostrarAlerta(form, 'El campo Empresa/Cliente solo debe contener letras.');
+        empresaClienteInput.value = value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+    }
+});
         // Validar campo Teléfono
         telefonoInput.addEventListener('input', function() {
             const value = telefonoInput.value;
