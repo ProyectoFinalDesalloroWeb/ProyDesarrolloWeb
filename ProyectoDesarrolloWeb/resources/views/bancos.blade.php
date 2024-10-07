@@ -8,8 +8,7 @@
     <div class="card p-4"> <!-- Añadido padding con la clase p-4 de Bootstrap -->
         <h2>Movimientos de Bancos</h2>
         <p class="card-text">
-            <a href="{{ route('bancos.pdf') }}" class="btn btn-primary">Generar PDF</a>
-
+           
             <div class="table-responsive"> 
                 <table class="table table-sm table-bordered inventario-table">
                     <thead>
@@ -33,6 +32,9 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                <a href="{{ route('bancos.pdf') }}" class="btn btn-primary">Generar Resumen Financiero</a>
+
             </div>
         </p>
     </div>

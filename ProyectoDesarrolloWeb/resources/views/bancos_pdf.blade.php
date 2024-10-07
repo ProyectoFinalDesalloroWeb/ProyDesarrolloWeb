@@ -63,7 +63,7 @@
         </div>
         <div class="company-info">
             <h2>Dulceria UMG</h2>
-            <p>Dirección: Ciudad de Guetmala, Avenida Reforma</p>
+            <p>Dirección: Ciudad de Guatemala, Avenida Reforma</p>
             <p>Teléfono: +502 1234 5678</p>
             <p>Email: contacto@dulceriaumg.com</p>
         </div>
@@ -88,8 +88,8 @@
                     <td>{{ $movimiento->fecha }}</td>
                     <td>{{ $movimiento->descripcion }}</td>
                     <td>{{ $movimiento->tipo }}</td>
-                    <td>{{ $movimiento->monto }}</td>
-                    <td>{{ $movimiento->saldo }}</td>
+                    <td>Q{{ $movimiento->monto }}</td>
+                    <td>Q{{ $movimiento->saldo }}</td>
                 </tr>
             @endforeach
         </tbody>
