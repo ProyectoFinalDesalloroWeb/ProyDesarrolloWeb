@@ -88,4 +88,5 @@ Route::get('/ventas/buscar', [VentaController::class, 'buscarVentas'])->name('ve
 
 //Ruta para bancos
 Route::get('/bancos', [BancoController::class, 'index'])->name('bancos');
+Route::get('/bancos/pdf', [BancoController::class, 'generarPDF'])->name('bancos.pdf');
 
