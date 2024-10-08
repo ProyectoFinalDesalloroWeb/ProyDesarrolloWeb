@@ -7,12 +7,27 @@
 <div class="container">
     <div class="card p-4"> <!-- Añadido padding con la clase p-4 de Bootstrap -->
         <h2>Movimientos de Bancos</h2>
-        
-        <!-- Botones para filtrar los movimientos -->
+
+        <!-- Formulario para filtrar por fecha y tipos de movimientos -->
         <form method="GET" action="{{ route('bancos') }}" class="mb-3">
-            <button type="submit" name="tipo" value="ingreso" class="btn btn-primary">Mostrar Ingresos</button>
-            <button type="submit" name="tipo" value="egreso" class="btn btn-primary">Mostrar Egresos</button>
-            <button type="submit" name="tipo" value="" class="btn btn-secondary">Mostrar Todos</button>
+            <div class="form-row align-items-end">
+                <div class="col-md-4 mb-3">
+                    <label for="fecha">Buscar por fecha:</label>
+                    <div class="input-group">
+                        <input type="date" name="fecha" class="form-control" value="{{ request('fecha') }}">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-success">Buscar</button> <!-- Botón de búsqueda al lado del input -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 mb-3">
+                    <div class="btn-group">
+                        <button type="submit" name="tipo" value="ingreso" class="btn btn-primary" onclick="clearDate()">Mostrar Ingresos</button>
+                        <button type="submit" name="tipo" value="egreso" class="btn btn-primary" onclick="clearDate()">Mostrar Egresos</button>
+                        <button type="submit" name="tipo" value="" class="btn btn-primary" onclick="clearDate()">Mostrar Todos</button>
+                    </div>
+                </div>
+            </div>
         </form>
 
         <div class="table-responsive"> 
@@ -32,8 +47,8 @@
                             <td>{{ $movimiento->fecha }}</td>
                             <td>{{ $movimiento->descripcion }}</td>
                             <td>{{ $movimiento->tipo }}</td>
-                            <td>Q{{ $movimiento->monto }}</td>
-                            <td>Q{{ $movimiento->saldo }}</td>
+                            <td>Q{{ number_format($movimiento->monto, 2) }}</td> <!-- Formatear monto -->
+                            <td>Q{{ number_format($movimiento->saldo, 2) }}</td> <!-- Formatear saldo -->
                         </tr>
                     @endforeach
                 </tbody>
@@ -45,14 +60,22 @@
         <!-- Mostrar totales -->
         <div class="mt-3">
             @if (request('tipo') === 'ingreso')
-                <h5>Total Ingresos: Q{{ $totalIngresos }}</h5>
+                <h5>Total Ingresos: Q{{ number_format($totalIngresos, 2) }}</h5> 
             @elseif (request('tipo') === 'egreso')
-                <h5>Total Egresos: Q{{ $totalEgresos }}</h5>
+                <h5>Total Egresos: Q{{ number_format($totalEgresos, 2) }}</h5> 
             @else
-                <h5>Total Ingresos: Q{{ $totalIngresos }}</h5>
-                <h5>Total Egresos: Q{{ $totalEgresos }}</h5>
+                <h5>Total Ingresos: Q{{ number_format($totalIngresos, 2) }}</h5> 
+                <h5>Total Egresos: Q{{ number_format($totalEgresos, 2) }}</h5> 
             @endif
         </div>
     </div>
 </div>
+
+<script>
+    function clearDate() {
+        const dateInput = document.querySelector('input[name="fecha"]');
+        dateInput.value = ''; // Limpiar el campo de fecha
+    }
+</script>
 @endsection
+
