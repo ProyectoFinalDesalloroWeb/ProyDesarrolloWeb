@@ -54,6 +54,12 @@
             margin-top: 10px;
             font-weight: bold;
         }
+        .total {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -88,12 +94,18 @@
                     <td>{{ $movimiento->fecha }}</td>
                     <td>{{ $movimiento->descripcion }}</td>
                     <td>{{ $movimiento->tipo }}</td>
-                    <td>Q{{ $movimiento->monto }}</td>
-                    <td>Q{{ $movimiento->saldo }}</td>
+                    <td>Q{{ number_format($movimiento->monto, 2) }}</td>
+                    <td>Q{{ number_format($movimiento->saldo, 2) }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <div class="total">
+        Total de Movimientos: {{ $totalMovimientos }} <br>
+        Total de Ingresos: Q{{ number_format($totalIngresos, 2) }} <br>
+        Total de Egresos: Q{{ number_format($totalEgresos, 2) }}
+    </div>
 
     <footer>
         <p>Este documento es generado automáticamente por el sistema de gestión bancaria. Para cualquier consulta, comuníquese con nosotros.</p>
