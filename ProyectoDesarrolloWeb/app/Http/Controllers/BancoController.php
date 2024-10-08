@@ -21,8 +21,12 @@ class BancoController extends Controller
         } else {
             $movimientos = Banco::orderBy('fecha', 'desc')->get(); // Obtener todos los movimientos
         }
-        
-        return view('bancos', compact('movimientos')); // Pasar movimientos a la vista
+
+        // Calcular totales
+        $totalIngresos = $movimientos->where('tipo', 'ingreso')->sum('monto'); // Sumar ingresos
+        $totalEgresos = $movimientos->where('tipo', 'egreso')->sum('monto'); // Sumar egresos
+
+        return view('bancos', compact('movimientos', 'totalIngresos', 'totalEgresos')); // Pasar movimientos y totales a la vista
     }
 
     public function generarPDF()

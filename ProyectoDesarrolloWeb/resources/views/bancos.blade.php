@@ -10,8 +10,8 @@
         
         <!-- Botones para filtrar los movimientos -->
         <form method="GET" action="{{ route('bancos') }}" class="mb-3">
-            <button type="submit" name="tipo" value="ingreso" class="btn btn-success">Mostrar Ingresos</button>
-            <button type="submit" name="tipo" value="egreso" class="btn btn-danger">Mostrar Egresos</button>
+            <button type="submit" name="tipo" value="ingreso" class="btn btn-primary">Mostrar Ingresos</button>
+            <button type="submit" name="tipo" value="egreso" class="btn btn-primary">Mostrar Egresos</button>
             <button type="submit" name="tipo" value="" class="btn btn-secondary">Mostrar Todos</button>
         </form>
 
@@ -40,7 +40,18 @@
             </table>
 
             <a href="{{ route('bancos.pdf') }}" class="btn btn-primary">Generar Resumen Financiero</a>
-
+        </div>
+        
+        <!-- Mostrar totales -->
+        <div class="mt-3">
+            @if (request('tipo') === 'ingreso')
+                <h5>Total Ingresos: Q{{ $totalIngresos }}</h5>
+            @elseif (request('tipo') === 'egreso')
+                <h5>Total Egresos: Q{{ $totalEgresos }}</h5>
+            @else
+                <h5>Total Ingresos: Q{{ $totalIngresos }}</h5>
+                <h5>Total Egresos: Q{{ $totalEgresos }}</h5>
+            @endif
         </div>
     </div>
 </div>
