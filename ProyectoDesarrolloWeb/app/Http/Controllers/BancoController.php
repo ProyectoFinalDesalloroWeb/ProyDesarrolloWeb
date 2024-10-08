@@ -21,8 +21,11 @@ class BancoController extends Controller
         // Obtener los movimientos de la tabla bancos
         $movimientos = Banco::orderBy('fecha', 'desc')->get(); // Obtener movimientos por fecha
 
+        // Contar el total de movimientos
+        $totalMovimientos = $movimientos->count(); // Contar los movimientos
+
         // Generar el PDF usando la vista 'bancospdf'
-        $pdf = Pdf::loadView('bancos_pdf', compact('movimientos'));
+        $pdf = Pdf::loadView('bancos_pdf', compact('movimientos', 'totalMovimientos'));
 
         // Descargar el PDF con el nombre "movimientos_bancos.pdf"
         return $pdf->download('movimientos_bancos.pdf');

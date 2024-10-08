@@ -54,6 +54,12 @@
             margin-top: 10px;
             font-weight: bold;
         }
+        .total {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -94,6 +100,10 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="total">
+        Total de Movimientos: {{ $totalMovimientos }}
+    </div>
 
     <footer>
         <p>Este documento es generado automáticamente por el sistema de gestión bancaria. Para cualquier consulta, comuníquese con nosotros.</p>
