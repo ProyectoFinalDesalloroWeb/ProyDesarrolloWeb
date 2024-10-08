@@ -30,8 +30,8 @@ class CreateBancosTable extends Migration
         DB::table('bancos')->insert([
             'descripcion' => 'Monto inicial',
             'tipo' => 'ingreso',
-            'monto' => 1000.00, // Cambia este valor según sea necesario
-            'saldo' => 1000.00, // Cambia este valor según sea necesario
+            'monto' => 100000.00, // Cambia este valor según sea necesario
+            'saldo' => 100000.00, // Cambia este valor según sea necesario
             'fecha' => now(),
         ]);
     }
