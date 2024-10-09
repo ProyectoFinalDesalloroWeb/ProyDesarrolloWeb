@@ -19,7 +19,7 @@
 
             <!-- Tabla de movimientos -->
             <div class='table table-responsive'>
-                <table class="table table-sm table-bordered">
+                <table class="table table-sm table-bordered movimientos-table">
                     <thead>
                         <tr>
                             <th>Producto</th>
@@ -52,3 +52,5 @@
         </div>
     </div>
 @endsection
+
+

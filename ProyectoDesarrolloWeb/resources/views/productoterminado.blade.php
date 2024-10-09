@@ -24,7 +24,7 @@
         <hr>
         <p class="card-text">  
         <div class= "table table-responsive">
-            <table class="table table-sm table-bordered">
+          <table class="table table-sm table-bordered inventario-table">
                 <thead>
                     <th>nombre</th>
                     <th>existencia</th>  
@@ -41,7 +41,7 @@
                   <td>{{$item->nombre}}</td> 
                   <td>{{$item->existencia}}</td>  
                   <td>{{$item->descripcion}}</td>  
-                  <td>{{$item->precio_unitario}}</td>  
+                  <td>Q{{$item->precio_unitario}}</td>  
                   <td>{{$item->fecha_ingreso}}</td>
                   <td>{{$item->fecha_vencimiento}}</td>
                   <td>

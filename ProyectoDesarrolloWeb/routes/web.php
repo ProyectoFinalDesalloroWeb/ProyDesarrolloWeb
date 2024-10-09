@@ -9,6 +9,11 @@ use App\Http\Controllers\ProductosfinalesController;
 use App\Http\Controllers\ProductosterminadosController;
 use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\BancoController;
+
+
+
 
 // Rutas de autenticación estándar proporcionadas por Laravel
 Auth::routes();
@@ -46,6 +51,7 @@ Route::get('/productoterminado', [ProductosfinalesController::class, 'productote
 Route::get('/actualizarproducto/{id}', [ProductosfinalesController::class, 'edit'])->name('actualizarp');
 Route::get('/showproducto/{id}', [ProductosfinalesController::class, 'show'])->name('showp');
 Route::put('/updatep/{id}', [ProductosfinalesController::class, 'update'])->name('updatep');
+Route::get('/eliminarUltimoProducto', [ProductosfinalesController::class, 'eliminarUltimoProducto'])->name('eliminarUltimoProducto');
 
 Route::get('/agregarproducto', [ProductosfinalesController::class, 'create'])->name('agregarp');
 Route::post('/storeproducto', [ProductosfinalesController::class, 'store'])->name('storep');
@@ -65,4 +71,22 @@ Route::post('/guardar-venta', [VentaController::class, 'guardarVenta'])->name('g
 
 Route::get('/ventas', [VentaController::class, 'index'])->name('indexpdf');
 Route::get('/ventas/{id}/pdf', [VentaController::class, 'generarPDF'])->name('pdf');
+
+
+Route::get('inicioclientes', [ClientesController::class,'index'])->name('inicioclientes');
+Route::get('/clientes', [ClientesController::class,'create'])->name('clientes.create');
+Route::get('/clientes/buscar', [ClientesController::class, 'buscar'])->name('clientes.buscar');
+Route::get('/clientes/{id}/show', [ClientesController::class, 'show'])->name('clientes.show');
+Route::post('/clientes', [ClientesController::class, 'store'])->name('clientes.store');
+Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->name('clientes.destroy');
+Route::get('/clientes/{id}/edit', [ClientesController::class, 'edit'])->name('clientes.edit'); // Solo una ruta edit
+Route::put('/clientes/{id}', [ClientesController::class, 'update'])->name('clientes.update');
+
+//ruta para historial de ventas
+Route::get('/historial', [VentaController::class, 'mostrarHistorialVentas'])->name('ventas.historial');
+Route::get('/ventas/buscar', [VentaController::class, 'buscarVentas'])->name('ventas.buscar');
+
+//Ruta para bancos
+Route::get('/bancos', [BancoController::class, 'index'])->name('bancos');
+Route::get('/bancos/pdf', [BancoController::class, 'generarPDF'])->name('bancos.pdf');
 

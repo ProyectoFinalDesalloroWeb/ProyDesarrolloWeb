@@ -9,6 +9,7 @@ use App\Models\Ventas;
 use App\Models\DetalleVentas;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Producto;
+use App\Models\Banco; // Línea añadida: Importar el modelo Banco
 
 class VentaController extends Controller
 {
@@ -42,6 +43,9 @@ class VentaController extends Controller
         $venta->fecha_venta = now();
         $venta->save();
 
+        // Inicializar el total de la venta
+        $totalVenta = 0; // Línea añadida: Inicializa el total de la venta
+
         // Almacenar los productos seleccionados en la venta
         foreach ($request->productos as $producto) {
             $productoFinal = productosfinales::find($producto['id']);
@@ -56,10 +60,29 @@ class VentaController extends Controller
             // Reducir el stock de productos
             $productoFinal->existencia -= $producto['cantidad'];
             $productoFinal->save();
+
+            // Acumular el subtotal al total de la venta
+            $totalVenta += $producto['cantidad'] * $productoFinal->precio_unitario; // Línea añadida: Acumula el subtotal
         }
 
+        // Línea añadida: Obtener el saldo actual
+        $saldoActual = Banco::orderBy('fecha', 'desc')->value('saldo') ?? 0; // Obtener el saldo más reciente
+
+        // Línea añadida: Calcular el nuevo saldo sumando el total de la venta
+        $nuevoSaldo = $saldoActual + $totalVenta;
+
+        // Registrar ingreso en la tabla bancos
+        Banco::create([ // Línea añadida: Registrar ingreso en la tabla bancos
+            'fecha' => now(),
+            'descripcion' => 'Ingreso por venta', // Línea añadida: Descripción del ingreso
+            'tipo' => 'ingreso', // Línea añadida: Tipo de movimiento
+            'monto' => $totalVenta, // Línea añadida: Monto del ingreso
+            'saldo' => $nuevoSaldo, // Línea añadida: Actualizar el saldo sumando el ingreso
+            'venta_id' => $venta->id, // Línea añadida: Referencia a la venta
+        ]);
+
         // Redirigir con un mensaje de éxito después de guardar
-        return redirect()->route('indexpdf')->with('success', 'Venta guardada correctamente.');
+        return redirect()->route('ventacliente')->with('success', 'Venta guardada correctamente.');
     }
 
     // Método para generar el PDF de la factura
@@ -72,13 +95,14 @@ class VentaController extends Controller
         $pdf = Pdf::loadView('pdf', ['venta' => $venta]);
 
         // Descargar el archivo PDF
-        return view('pdf', compact('venta', 'detalles'));
+        return view('pdf', compact('venta'));
     }
+
     public function producto()
     {
         return $this->belongsTo(Productosfinales::class, 'producto_id');
     }
- 
+
     //-------------------------------------
 
     public function index()
@@ -94,13 +118,53 @@ class VentaController extends Controller
         $detalles = DetalleVentas::where('venta_id', $ventaId)->get();
 
         // Cargar la vista para el PDF
-        $pdf = PDF::loadView('pdf', compact('venta', 'detalles'));
+        $pdf = Pdf::loadView('pdf', compact('venta', 'detalles'));
 
         // Devolver el PDF
         return $pdf->download('venta_' . $venta->id . '.pdf');
     }
 
-    // Método para devolver la cantidad de stock de un producto
+    public function mostrarHistorialVentas()
+    {
+        // Traer todas las ventas con la relación de cliente y productos
+        $ventas = Ventas::with('cliente', 'productos')->get();
+        
+        // Calcular el total de cada venta
+        foreach ($ventas as $venta) {
+            $venta->total_venta = 0; // Inicializar el total de la venta
+            foreach ($venta->productos as $producto) {
+                $venta->total_venta += $producto->pivot->subtotal; // Sumar el subtotal de cada producto
+            }
+        }
+        // Retornar la vista y pasar las ventas
+        return view('historialventas', compact('ventas'));
+    }
+
+    public function buscarVentas(Request $request)
+    {
+        // Obtener el query de búsqueda
+        $query = $request->input('query');
+    
+        // Filtrar ventas por código de cliente o nombre de cliente
+        $ventas = Ventas::with('cliente', 'productos') // Incluye la relación de productos
+            ->whereHas('cliente', function ($q) use ($query) {
+                $q->where('Codigo', 'like', "%$query%")
+                  ->orWhere('Empresa_Cliente', 'like', "%$query%");
+            })
+            ->get();
+    
+        // Calcular el total de cada venta
+        foreach ($ventas as $venta) {
+            $venta->total_venta = 0; // Inicializar el total de la venta
+            foreach ($venta->productos as $producto) {
+                $venta->total_venta += $producto->pivot->subtotal; // Sumar el subtotal de cada producto
+            }
+        }
+    
+        return view('historialventas', compact('ventas'));
+    }
+
+    /* Método para devolver la cantidad de stock de un producto
     public function obtenerStock($productoId)
     {
         $producto = Producto::find($productoId);
@@ -119,7 +183,5 @@ class VentaController extends Controller
 
         $clientes = Cliente::all(); // Mantener los clientes en el dropdown
         return view('ventascliente', compact('ventas', 'clientes'));
-    }
-    
+    }*/
 }
-

@@ -2,24 +2,25 @@
 
 @section('tituloPagina', 'Producción')
 
-@section('contenido')
+@section('contenido') 
+<br>
 <div class="card">
     <h5 class="card-header">Agregar producto</h5>
     <div class="card-body">
         <p class="card-text">
-            <form action="{{route('storep')}}" method="POST">
+            <form action="{{route('storep')}}" method="POST" class="formagregar">
                 @csrf
-                <label for="">Nombre</label>
+                <label class="form-label" for="">Nombre</label>
                 <input type="text" name="nombre" class="form-control" required>
-                <label for="">existencia</label>
+                <label class="form-label" for="">existencia</label>
                 <input type="text" name="existencia" class="form-control" required>
-                <label for="">descripcion</label>
+                <label class="form-label" for="">descripcion</label>
                 <input type="text" name="descripcion" class="form-control" required>
-                <label for="">precio unitario</label>
+                <label class="form-label" for="">precio unitario</label>
                 <input type="text" name="precio_unitario" class="form-control" required>
-                <label for="">fecha ingreso</label>
+                <label class="form-label" for="">fecha ingreso</label>
                 <input type="date" name="fecha_ingreso" class="form-control" required>
-                <label for="">fecha vencimiento</label>
+                <label class="form-label" for="">fecha vencimiento</label>
                 <input type="date" name="fecha_vencimiento" class="form-control" required>
                 <br>
                 <a href="{{route('productot')}}" class="btn btn-info">

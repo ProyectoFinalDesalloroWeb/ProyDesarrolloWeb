@@ -130,5 +130,19 @@ class ProductosfinalesController extends Controller
         }
     }
 
+    public function eliminarUltimoProducto()
+    {
+        // Obtener el último producto insertado
+        $ultimoProducto = productosfinales::latest('id')->first();
+    
+        // Verificar si existe el producto
+        if ($ultimoProducto) {
+            // Eliminar el último producto
+            $ultimoProducto->delete();
+        }
+    
+        // Redirigir a la vista 'agregarproducto' después de eliminar
+        return redirect()->route('agregarp');
+    }
 }
 

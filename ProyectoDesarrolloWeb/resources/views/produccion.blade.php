@@ -33,7 +33,7 @@
 
         <br><br>
 
-        <a href="{{route('agregarp')}}" class="btn btn-info">
+        <a href="{{route('eliminarUltimoProducto')}}" class="btn btn-info">
                     <span class="fas fa-undo"></span> Regresar
                 </a>
         <button type="submit" class="btn btn-primary">Crear Dulce</button>
