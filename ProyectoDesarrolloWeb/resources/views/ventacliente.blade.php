@@ -16,7 +16,7 @@
 
         <!-- Selección del Cliente -->
         <div class="form-group row align-items-center">
-            <label for="cliente" class="col-sm-2 col-form-label fs-4 font-weight-bold text-primary">
+            <label for="cliente" class="col-sm-2 col-form-label fs-4 font-weight-bold" style="color: black;">
                 Cliente
             </label>
             <div class="col-sm-6">
