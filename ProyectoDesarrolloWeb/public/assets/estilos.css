@@ -450,9 +450,11 @@ body {
 /* Estilo para las celdas de la tabla */
 .eliminar-table td {
     padding: 10px;
+    white-space: normal; /* Permite que el texto se ajuste en varias líneas */
+    word-wrap: break-word; /* Permite romper las palabras largas */
+    max-width: 150px; /* Ajusta este valor según lo que necesites */
     border-bottom: 1px solid #b2dfdb;
-    overflow: hidden;
-    white-space: nowrap;
+    overflow: hidden; /* Oculta cualquier contenido desbordado */
 }
 
 /* Efecto de sombra para las filas al pasar el cursor */
@@ -490,9 +492,11 @@ body {
 /* Estilo para las celdas de la tabla */
 .inventario-table td {
     padding: 10px;
+    white-space: normal; /* Permite que el texto se ajuste en varias líneas */
+    word-wrap: break-word; /* Permite romper las palabras largas */
+    max-width: 150px; /* Ajusta este valor según lo que necesites */
     border-bottom: 1px solid #b2dfdb;
-    overflow: hidden;
-    white-space: nowrap;
+    overflow: hidden; /* Oculta cualquier contenido desbordado */
 }
 
 /* Efecto de sombra para las filas al pasar el cursor */
