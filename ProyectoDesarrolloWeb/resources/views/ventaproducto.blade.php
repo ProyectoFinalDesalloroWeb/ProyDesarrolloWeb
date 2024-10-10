@@ -69,13 +69,19 @@
             Debes agregar al menos un producto a la lista antes de guardar la venta.
         </div>
 
-        <!-- Botón para guardar la venta -->
-        <button type="submit" class="btn btn-primary">Guardar Venta</button>
+        <!-- Botones -->
+        <div class="form-group">
+            <!-- Botón para guardar la venta -->
+            <button type="submit" class="btn btn-primary">Guardar Venta</button>
+
+            <!-- Botón para redirigir a la ruta ventacliente -->
+            <a href="{{ route('ventacliente') }}" class="btn btn-primary">Regresar</a>
+        </div>
     </form>
 </div>
 
 <script>
-    // Variables para almacenar la lista de productos y sus cantidades
+// Variables para almacenar la lista de productos y sus cantidades
 const productosAgregados = document.getElementById('productosAgregados');
 const productoSelect = document.getElementById('productoSelect');
 const cantidadInput = document.getElementById('cantidad');
