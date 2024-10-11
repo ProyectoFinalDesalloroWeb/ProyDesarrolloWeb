@@ -151,6 +151,7 @@ Visualizar el Registro de Movimientos de Materia Prima:
 
 Muestra un historial detallado de los movimientos de cada materia prima, indicando el nombre del insumo, el tipo de movimiento (entrada o salida), la cantidad y la fecha. Este registro es útil para rastrear el uso y disponibilidad de las materias primas a lo largo del 
 tiempo.
+
                                                                   MODULO 2
                                                                   
 Gestión de Productos Terminados (Dulces)
